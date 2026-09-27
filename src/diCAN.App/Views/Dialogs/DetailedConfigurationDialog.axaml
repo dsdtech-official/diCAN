@@ -1,0 +1,117 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        xmlns:loc="using:DiCAN.App.Localization"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="420"
+        x:Class="DiCAN.App.Views.Dialogs.DetailedConfigurationDialog"
+        x:DataType="dialogs:DetailedConfigurationViewModel"
+        Title="{loc:Translate Dialog.Detailed.Title}"
+        Width="480" MinWidth="440" MaxWidth="620"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="20" Spacing="14">
+
+    <StackPanel Spacing="6">
+      <TextBlock Text="{loc:Translate Dialog.Detailed.Section.Bus}" FontWeight="SemiBold" />
+
+      <Grid ColumnDefinitions="*,Auto">
+        <CheckBox Grid.Column="0" IsChecked="{Binding AutoRetransmit}" IsEnabled="{Binding IsIdentified}"
+                  Content="{loc:Translate Dialog.Detailed.Retransmit}" Padding="6,0,0,0" MinHeight="0" />
+
+        <Button Grid.Column="1" Padding="7,1" Content="?" VerticalAlignment="Center">
+          <Button.Flyout>
+            <Flyout Placement="BottomEdgeAlignedRight">
+              <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                         Text="{loc:Translate Dialog.Detailed.Retransmit.Hint}" />
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+      </Grid>
+
+      <TextBlock Text="{loc:Translate Dialog.Detailed.SamplePoint}" Margin="0,6,0,0" />
+
+      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
+        <ComboBox Grid.Column="0" ItemsSource="{Binding SamplePoints}"
+                  SelectedItem="{Binding SelectedSamplePoint}"
+                  IsEnabled="{Binding IsSamplePointSettable}"
+                  HorizontalAlignment="Stretch" />
+
+        <Button Grid.Column="1" Padding="7,1" Content="?" VerticalAlignment="Center">
+          <Button.Flyout>
+            <Flyout Placement="BottomEdgeAlignedRight">
+              <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                         Text="{loc:Translate Dialog.Detailed.SamplePoint.Hint}" />
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+      </Grid>
+
+      <TextBlock Classes="dim" FontSize="11" TextWrapping="Wrap"
+                 IsVisible="{Binding !IsSamplePointSettable}"
+                 Text="{loc:Translate Dialog.Detailed.SamplePoint.Fixed}" />
+    </StackPanel>
+
+    <Border Height="1" Background="{DynamicResource DiCanSeparatorBrush}" />
+
+    <StackPanel Spacing="6">
+      <TextBlock Text="{loc:Translate Dialog.Detailed.Section.Device}" FontWeight="SemiBold" />
+
+      <TextBlock Classes="dim" FontSize="12" TextWrapping="Wrap"
+                 IsVisible="{Binding !IsIdentified}"
+                 Text="{loc:Translate Dialog.Detailed.NotIdentified}" />
+
+      <TextBlock Classes="dim" FontSize="12" TextWrapping="Wrap"
+                 IsVisible="{Binding ReportsNothingMore}"
+                 Text="{loc:Translate Dialog.Detailed.NothingMore}" />
+
+      <ItemsControl ItemsSource="{Binding VisibleDetails}" IsVisible="{Binding HasDetails}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="dialogs:DeviceDetailRow">
+            <Grid ColumnDefinitions="150,*,Auto" Margin="0,0,0,4">
+              <TextBlock Grid.Column="0" Classes="dim" FontSize="12" Text="{Binding Label}" />
+
+              <SelectableTextBlock Grid.Column="1" FontSize="12" TextWrapping="Wrap"
+                                   FontFamily="Consolas,Menlo,monospace" Text="{Binding Value}" />
+
+              <Button Grid.Column="2" Padding="7,0" Content="?" MinHeight="0"
+                      FontSize="11" VerticalAlignment="Top" Margin="6,0,0,0"
+                      IsVisible="{Binding HasHint}">
+                <Button.Flyout>
+                  <Flyout Placement="BottomEdgeAlignedRight">
+                    <TextBlock Width="300" TextWrapping="Wrap" FontSize="12" Text="{Binding Hint}" />
+                  </Flyout>
+                </Button.Flyout>
+              </Button>
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+    </StackPanel>
+
+    <Border Height="1" Background="{DynamicResource DiCanSeparatorBrush}" IsVisible="{Binding ShowDfuSection}" />
+    <StackPanel Spacing="6" IsVisible="{Binding ShowDfuSection}">
+      <TextBlock Text="{loc:Translate Dialog.Detailed.Section.Firmware}" FontWeight="SemiBold" />
+      <TextBlock Classes="dim" FontSize="12" TextWrapping="Wrap"
+                 Text="{loc:Translate Dialog.Detailed.Dfu.Explain}" />
+      <Button HorizontalAlignment="Left" Command="{Binding AllowDfuCommand}"
+              IsEnabled="{Binding IsDfuButtonEnabled}"
+              Content="{loc:Translate Dialog.Detailed.Dfu.Allow}" />
+      <TextBlock FontSize="12" TextWrapping="Wrap" IsVisible="{Binding ShowDfuAllowed}"
+                 Text="{loc:Translate Dialog.Detailed.Dfu.Allowed}" />
+      <SelectableTextBlock FontSize="12" TextWrapping="Wrap" IsVisible="{Binding ShowDfuAllowed}"
+                           Text="{Binding DfuGuideUrl}" />
+      <TextBlock FontSize="12" TextWrapping="Wrap" IsVisible="{Binding ShowDfuFailed}"
+                 Foreground="{DynamicResource DiCanErrorForegroundBrush}"
+                 Text="{loc:Translate Dialog.Detailed.Dfu.Failed}" />
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+      <Button Content="{loc:Translate Common.Cancel}" IsCancel="True" Click="OnCancel" />
+      <Button Content="{loc:Translate Common.Ok}" IsDefault="True" Click="OnAccept" />
+    </StackPanel>
+  </StackPanel>
+</Window>

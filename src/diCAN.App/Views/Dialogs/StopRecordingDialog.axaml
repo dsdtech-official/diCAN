@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:loc="using:DiCAN.App.Localization"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        mc:Ignorable="d" d:DesignWidth="440" d:DesignHeight="240"
+        x:Class="DiCAN.App.Views.Dialogs.StopRecordingDialog"
+        x:DataType="dialogs:StopRecordingViewModel"
+        Title="{loc:Translate Record.Stop.Title}"
+        Width="440" MinWidth="400" MaxWidth="560"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="20" Spacing="14">
+
+    <TextBlock TextWrapping="Wrap" IsVisible="{Binding ClosingPort}"
+               Text="{loc:Translate Record.Stop.Body}" />
+
+    <TextBlock TextWrapping="Wrap" IsVisible="{Binding StoppingOnly}"
+               Text="{loc:Translate Record.Stop.BodyStopping}" />
+
+    <Border IsVisible="{Binding ShowNotWired}"
+            Background="{DynamicResource DiCanErrorSurfaceBrush}" CornerRadius="4" Padding="10,7">
+      <TextBlock FontSize="12" TextWrapping="Wrap"
+                 Text="{loc:Translate Record.Stop.NotWired}" />
+    </Border>
+
+    <TextBlock FontSize="12" TextWrapping="Wrap" Opacity="0.85"
+               Text="{loc:Translate Record.Stop.WhereToExport}" />
+
+    <CheckBox IsChecked="{Binding ExportWhenKept}"
+              Content="{loc:Translate Record.Stop.ExportNow}" />
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+      <Button Content="{loc:Translate Common.Cancel}" IsCancel="True" Click="OnCancelClick" />
+      <Button x:Name="KeepButton" MinWidth="120" IsDefault="True"
+              Content="{loc:Translate Record.Stop.Keep}" Click="OnKeepClick" />
+    </StackPanel>
+  </StackPanel>
+</Window>

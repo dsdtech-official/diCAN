@@ -1,0 +1,101 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        xmlns:loc="using:DiCAN.App.Localization"
+        mc:Ignorable="d" d:DesignWidth="470" d:DesignHeight="400"
+        x:Class="DiCAN.App.Views.Dialogs.ExportDialog"
+        x:DataType="dialogs:ExportViewModel"
+        Title="{loc:Translate Export.Title}"
+        Width="470" MinWidth="430" MaxWidth="600"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="20" Spacing="14">
+
+    <StackPanel Spacing="2">
+      <TextBlock Text="{loc:Translate Export.What}" FontWeight="SemiBold" />
+      <TextBlock Text="{Binding RecordingName}" Classes="dim" FontSize="12" TextWrapping="Wrap" />
+    </StackPanel>
+
+    <Border Height="1" Background="{DynamicResource DiCanSeparatorBrush}" />
+
+    <StackPanel Spacing="10" IsVisible="{Binding IsFinished}">
+
+      <Border CornerRadius="4" Padding="10,8"
+              Background="{DynamicResource DiCanSafeSurfaceBrush}"
+              IsVisible="{Binding OutcomeIsClean}">
+        <TextBlock FontSize="12" TextWrapping="Wrap" Text="{Binding Outcome}" />
+      </Border>
+
+      <Border CornerRadius="4" Padding="10,8"
+              Background="{DynamicResource DiCanCautionSurfaceBrush}"
+              IsVisible="{Binding OutcomeIsPartial}">
+        <TextBlock FontSize="12" TextWrapping="Wrap" Text="{Binding Outcome}" />
+      </Border>
+
+      <Border CornerRadius="4" Padding="10,8"
+              Background="{DynamicResource DiCanErrorSurfaceBrush}"
+              IsVisible="{Binding OutcomeIsRefused}">
+        <TextBlock FontSize="12" TextWrapping="Wrap" Text="{Binding Outcome}" />
+      </Border>
+
+      <Button HorizontalAlignment="Right" MinWidth="110" IsDefault="True" IsCancel="True"
+              Content="{loc:Translate Common.Close}" Click="OnCancelClick" />
+    </StackPanel>
+
+    <StackPanel Spacing="14" IsVisible="{Binding !IsFinished}">
+
+    <StackPanel Spacing="8">
+      <TextBlock Text="{loc:Translate Export.Format}" FontWeight="SemiBold" />
+
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <RadioButton Grid.Column="0" GroupName="format" IsChecked="{Binding IsCsv}"
+                     MinHeight="0" Padding="6,0,0,0" VerticalAlignment="Center"
+                     Content="{loc:Translate Export.Csv}" />
+
+        <Button Grid.Column="2" Padding="7,1" Content="?" VerticalAlignment="Center">
+          <Button.Flyout>
+            <Flyout Placement="BottomEdgeAlignedRight">
+              <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                         Text="{loc:Translate Export.Csv.Hint}" />
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+      </Grid>
+
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <RadioButton Grid.Column="0" GroupName="format" IsChecked="{Binding IsTrc}"
+                     MinHeight="0" Padding="6,0,0,0" VerticalAlignment="Center"
+                     Content="{loc:Translate Export.Trc}" />
+
+        <Button Grid.Column="2" Padding="7,1" Content="?" VerticalAlignment="Center">
+          <Button.Flyout>
+            <Flyout Placement="BottomEdgeAlignedRight">
+              <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                         Text="{loc:Translate Export.Trc.Hint}" />
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+      </Grid>
+    </StackPanel>
+
+    <Border Background="{DynamicResource DiCanCautionSurfaceBrush}" CornerRadius="4" Padding="10,7">
+      <TextBlock FontSize="12" TextWrapping="Wrap" Text="{loc:Translate Export.FilterNote}" />
+    </Border>
+
+    <Border IsVisible="{Binding ShowNotWired}"
+            Background="{DynamicResource DiCanErrorSurfaceBrush}" CornerRadius="4" Padding="10,7">
+      <TextBlock FontSize="12" TextWrapping="Wrap" Text="{loc:Translate Export.NotWired}" />
+    </Border>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+      <Button Content="{loc:Translate Common.Cancel}" IsCancel="True" Click="OnCancelClick" />
+      <Button Content="{loc:Translate Export.Save}" IsDefault="True" MinWidth="110"
+              Click="OnExportClick" />
+    </StackPanel>
+
+    </StackPanel>
+  </StackPanel>
+</Window>

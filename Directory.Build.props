@@ -1,0 +1,42 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+
+    <PathMap>$(MSBuildThisFileDirectory)=/_/</PathMap>
+
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AvaloniaVersion>12.1.0</AvaloniaVersion>
+    <CommunityToolkitMvvmVersion>8.4.2</CommunityToolkitMvvmVersion>
+    <MicrosoftExtensionsVersion>10.0.10</MicrosoftExtensionsVersion>
+
+    <SerilogVersion>4.4.0</SerilogVersion>
+    <SerilogExtensionsLoggingVersion>10.0.0</SerilogExtensionsLoggingVersion>
+    <SerilogFormattingCompactVersion>3.0.0</SerilogFormattingCompactVersion>
+    <SerilogSinksAsyncVersion>2.1.0</SerilogSinksAsyncVersion>
+    <SerilogSinksFileVersion>7.0.0</SerilogSinksFileVersion>
+
+    <SQLitePCLRawVersion>3.0.5</SQLitePCLRawVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+
+    <Version>1.0.0</Version>
+
+    <InformationalVersion>1.0.0 build20260925</InformationalVersion>
+    <Product>diCAN</Product>
+    <Company>DSD TECH (DongGuan DESHIDE TECHNOLOGY CO.,LTD)</Company>
+
+    <Copyright>Copyright (c) 2026 DongGuan DESHIDE TECHNOLOGY CO.,LTD</Copyright>
+  </PropertyGroup>
+
+</Project>

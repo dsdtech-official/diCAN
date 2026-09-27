@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:loc="using:DiCAN.App.Localization"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        mc:Ignorable="d" d:DesignWidth="420" d:DesignHeight="170"
+        x:Class="DiCAN.App.Views.Dialogs.ClearHistoryDialog"
+        x:DataType="dialogs:ClearHistoryViewModel"
+        Title="{loc:Translate History.ClearAll.Title}"
+        Width="420" MinWidth="380" MaxWidth="540"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="20" Spacing="14">
+
+    <TextBlock TextWrapping="Wrap" Text="{Binding Message}" />
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+      <Button x:Name="CancelButton" Content="{loc:Translate Common.Cancel}"
+              IsCancel="True" IsDefault="True" Click="OnCancelClick" />
+      <Button MinWidth="110" Content="{loc:Translate History.ClearAll.Confirm}"
+              Click="OnConfirmClick" />
+    </StackPanel>
+  </StackPanel>
+</Window>

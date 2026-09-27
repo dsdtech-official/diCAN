@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="Menu.File"><value>文件</value></data>
+  <data name="Menu.File.Exit"><value>退出</value></data>
+  <data name="Menu.Session"><value>会话</value></data>
+  <data name="Menu.Session.New"><value>新建会话…</value></data>
+  <data name="Menu.Session.Disconnect"><value>断开</value></data>
+  <data name="Menu.Tools"><value>工具</value></data>
+  <data name="Menu.Language"><value>语言（{0}）</value>                                                                                                                                                </data>
+  <data name="Menu.Help"><value>帮助</value></data>
+  <data name="Menu.Help.About"><value>关于 diCAN</value></data>
+  <data name="About.Title"><value>关于 diCAN</value></data>
+  <data name="About.Message" xml:space="preserve"><value>diCAN —— 免费开源的 CAN 分析上位机
+
+V{0}。一个适配器，一条总线：接收可按 ID 聚合或按帧流查看，支持周期发送与单帧发送，可录制入库并导出。为 DSD TECH SH-C3x 系列适配器开发的官方配套软件。
+
+DongGuan DESHIDE TECHNOLOGY CO.,LTD
+东莞市德士德科技有限公司
+www.deshide.com    dsd_tech@outlook.com
+github.com/dsdtech-official/diCAN
+
+依 Apache-2.0 许可证发布。
+"DSD TECH" is a registered trademark of DongGuan DESHIDE TECHNOLOGY CO.,LTD.
+完整声明见可执行文件旁的 NOTICE 与 LICENSE 文件。</value></data>
+
+  <data name="Empty.SelectSessionType"><value>选择连接方式</value></data>
+
+  <data name="SessionType.Single.Title"><value>单路 CAN</value></data>
+  <data name="SessionType.Single.Description"><value>一个适配器，一条总线。支持正常、监听，以及固件支持时的环回。</value></data>
+  <data name="Mode.Normal"><value>正常 —— 发送、接收并应答（会加入总线）</value></data>
+  <data name="Mode.Silent"><value>监听 —— 只接收、不应答，可安全接入他人的总线</value></data>
+  <data name="Mode.InternalLoopback"><value>内部环回 —— 只听自己，帧不上总线</value></data>
+  <data name="Mode.ExternalLoopback"><value>外部环回 —— 帧发出再回来</value></data>
+  <data name="Mode.Short.Normal"><value>正常</value></data>
+  <data name="Mode.Short.Silent"><value>监听</value></data>
+  <data name="Mode.Short.InternalLoopback"><value>内部环回</value></data>
+  <data name="Mode.Short.ExternalLoopback"><value>外部环回</value></data>
+  <data name="Dialog.BusMode"><value>总线模式</value></data>
+  <data name="Dialog.BusMode.Placeholder"><value>请选择模式</value></data>
+
+  <data name="Dialog.NewSession.Title"><value>新建会话</value></data>
+  <data name="Dialog.Column.Port"><value>端口</value></data>
+  <data name="Dialog.Column.Model"><value>型号</value></data>
+  <data name="Dialog.Column.Firmware"><value>固件</value></data>
+  <data name="Dialog.Column.Note"><value>备注</value></data>
+  <data name="Naming.Prompt"><value>这看起来是一台新适配器，给它起个名？</value></data>
+  <data name="Naming.Save"><value>保存</value></data>
+  <data name="Naming.Dismiss"><value>不用</value></data>
+  <data name="Naming.SaveFailed"><value>保存名字失败，详细原因已写进日志。</value></data>
+  <data name="Session.DeviceRecordSaveFailed"><value>保存设备记录失败，详细原因已写进日志。</value></data>
+  <data name="Session.ConnectionLost"><value>连接已中断，详细原因已写进日志。</value></data>
+  <data name="Record.StartFailed"><value>开始录制失败，详细原因已写进日志。</value></data>
+  <data name="Record.Faulted"><value>录制因故障停止，详细原因已写进日志。</value></data>
+  <data name="Reconnect.Failed"><value>重连失败，详细原因已写进日志。</value></data>
+  <data name="Dialog.Device.Detecting"><value>正在检测设备…</value></data>
+  <data name="Dialog.Device.NoneSupported"><value>未找到适配器，请检查设备是否处于烧录模式（通过拨动开关调整）。</value>                                                                                                                                                                                                                                                                                               </data>
+  <data name="Device.State.NoPort"><value>Windows 未分配 COM 口</value></data>
+  <data name="Dialog.Bitrate.Placeholder"><value>稍候</value>                                                                                                                                                                                                      </data>
+  <data name="Dialog.DataBitrate.Unsupported"><value>无 FD</value>                                                                                                                                                                                                                         </data>
+  <data name="Dialog.Device.Crystal.Yes"><value>已装晶振</value></data>
+  <data name="Dialog.Device.Crystal.No"><value>无晶振</value></data>
+  <data name="Dialog.DataBitrate"><value>FD</value></data>
+  <data name="Dialog.DetailedConfiguration"><value>更多设置…</value></data>
+  <data name="Dialog.Detailed.Title"><value>更多设置</value></data>
+  <data name="Dialog.Detailed.SamplePoint"><value>仲裁采样点</value></data>
+  <data name="Dialog.Detailed.SamplePoint.Default"><value>默认（75%）</value></data>
+  <data name="Dialog.Detailed.SamplePoint.Hint"><value>必须与总线上其它节点一致，不是越高越好。差得够多时经典帧照常通过、CAN FD 帧全丢，而且不报错。</value></data>
+  <data name="Dialog.Detailed.SamplePoint.Fixed"><value>这个适配器的位时序来自它自己的固件。</value></data>
+  <data name="Dialog.Detailed.Section.Bus"><value>总线设置</value></data>
+  <data name="Dialog.Detailed.Retransmit"><value>自动重传</value></data>
+  <data name="Dialog.Detailed.Retransmit.Hint"><value>开启时，适配器会重发未获应答的帧；关闭时，只尝试发送一次。只能在加入总线之前设置。</value></data>
+  <data name="Dialog.Detailed.Section.Device"><value>本适配器报告的内容</value></data>
+  <data name="Dialog.Detailed.Section.Firmware"><value>固件更新</value></data>
+  <data name="Dialog.Detailed.Dfu.Explain"><value>使用此固件时，拨动开关 SW1 只有在这里允许之后才能进入 DFU 模式，且只对下一次上电有效。</value></data>
+  <data name="Dialog.Detailed.Dfu.Allow"><value>允许下次上电进入 DFU</value></data>
+  <data name="Dialog.Detailed.Dfu.Allowed"><value>已允许下一次上电进入 DFU。更新步骤请见：</value></data>
+  <data name="Dialog.Detailed.Dfu.Failed"><value>适配器没有确认。请关闭正在使用它的会话，重新插拔后再试。</value></data>
+  <data name="Dialog.Detailed.NotIdentified"><value>正在等待适配器应答。以下信息由适配器报告。</value></data>
+  <data name="Dialog.Detailed.NothingMore"><value>此固件只报告构建号，上一屏已经显示。</value></data>
+
+  <data name="Dialog.Detailed.Firmware"><value>固件构建号</value></data>
+  <data name="Dialog.Detailed.Mcu"><value>处理器</value></data>
+  <data name="Dialog.Detailed.Clock"><value>CAN 时钟</value></data>
+  <data name="Dialog.Detailed.CanFd"><value>CAN FD</value></data>
+  <data name="Dialog.Detailed.ListenOnly"><value>监听模式</value></data>
+  <data name="Dialog.Detailed.Loopback"><value>环回模式</value></data>
+  <data name="Dialog.Detailed.HardwareTimestamp"><value>硬件时间戳</value></data>
+  <data name="Dialog.Detailed.HardwareTimestamp.Unused"><value>{0}（本版本不使用）</value></data>
+  <data name="Dialog.Detailed.ErrorCounters"><value>错误计数器</value></data>
+  <data name="Dialog.Detailed.DataLimits"><value>位时序限值（数据段）</value></data>
+  <data name="Dialog.Detailed.NominalLimits"><value>位时序限值（仲裁段）</value></data>
+  <data name="Common.Yes"><value>有</value></data>
+  <data name="Common.No"><value>无</value></data>
+  <data name="Common.None"><value>无</value></data>
+  <data name="Dialog.Detailed.Serial"><value>序列号</value></data>
+  <data name="Dialog.Detailed.Limits"><value>位时序限值</value></data>
+  <data name="Dialog.Detailed.Limits.Hint"><value>固件自报的位时序限值，按它报告的顺序排列。反馈问题时请一并提供。</value></data>
+  <data name="Dialog.Bitrate"><value>标称速率</value></data>
+  <data name="Dialog.Rescan"><value>重新扫描</value></data>
+  <data name="Dialog.Rescan.Busy"><value>识别中…</value>                                                 </data>
+  <data name="Common.Ok"><value>确定</value></data>
+  <data name="Common.Cancel"><value>取消</value></data>
+  <data name="Common.Close"><value>关闭</value></data>
+  <data name="Common.Connect"><value>连接</value></data>
+
+  <data name="Toolbar.Disconnect"><value>断开</value></data>
+  <data name="Toolbar.Connect"><value>连接</value></data>
+  <data name="Session.ReconnectDeviceGone"><value>{0} 已不再连接到这台电脑。</value></data>
+  <data name="Toolbar.CloseSession"><value>关闭会话</value></data>
+  <data name="Record.Stop.Title"><value>停止录制</value></data>
+  <data name="Record.Stop.Body"><value>关闭端口会停止这次录制。它的帧已经写在磁盘上了 —— 停止不会丢失它们。</value></data>
+  <data name="Record.Stop.BodyStopping"><value>帧已经写在磁盘上了 —— 停止不会丢失它们。</value></data>
+  <data name="Record.Stop.Keep"><value>停止录制</value></data>
+  <data name="Record.Stop.NotWired"><value>无法打开录制数据库，因此没有正在进行的录制可以停止。</value></data>
+  <data name="Record.Stop.WhereToExport"><value>录制随时可以在「工具 → 录制管理」里导出，也可以在那里删除。</value></data>
+  <data name="Record.Stop.ExportNow"><value>立即导出</value></data>
+  <data name="Toolbar.Clear"><value>清空</value></data>
+  <data name="Toolbar.Pause"><value>暂停</value></data>
+  <data name="Toolbar.Resume"><value>恢复</value></data>
+  <data name="Toolbar.Record"><value>录制</value></data>
+  <data name="Recordings.Title"><value>录制管理</value></data>
+  <data name="Recordings.LibrarySize"><value>全部录制共占用磁盘 {0}</value></data>
+  <data name="Recordings.Sample"><value>无法打开录制数据库，因此下方显示的是示例，并非你的录制。详细原因已写入日志。</value></data>
+  <data name="Recordings.Empty"><value>还没有录制。会话进行中按「录制」就能录一次。</value></data>
+  <data name="Recordings.Export"><value>导出…</value></data>
+  <data name="Recordings.Delete"><value>删除</value></data>
+  <data name="Recordings.Delete.Go"><value>永久删除</value></data>
+  <data name="Recordings.Delete.Confirm"><value>删除 {2} 的「{0}」及其 {1:N0} 帧？此操作不可撤销，且删掉的空间不会还给文件。</value>                                                                                                                                                                         </data>
+  <data name="Recordings.Delete.ConfirmNoCount"><value>删除 {1} 的「{0}」？此操作不可撤销，且删掉的空间不会还给文件。</value>                                                                       </data>
+  <data name="Recordings.Delete.Failed"><value>删除失败，详细原因已写进日志。</value></data>
+  <data name="Recordings.Compact"><value>压缩</value></data>
+  <data name="Recordings.Compact.Note"><value>删除一条录制只是在文件内部腾出空间，文件本身不会变小。「压缩」会重写每个月份，把这部分空间交还给磁盘。它运行时需要能再放下一份文件副本的空间。</value></data>
+  <data name="Recordings.Compact.WhileRecording"><value>录制进行中，无法压缩。</value></data>
+  <data name="Recordings.Compact.Done"><value>已压缩 {1} 个月份，回收 {0}。</value></data>
+  <data name="Recordings.Compact.DoneSkipped"><value>已压缩 {1} 个月份，回收 {0}。另有 {2} 个月份被跳过，详细原因已写进日志。</value></data>
+  <data name="Recordings.Compact.Nothing"><value>没有可压缩的内容。</value></data>
+  <data name="Recordings.Compact.Failed"><value>压缩失败，详细原因已写进日志。</value></data>
+  <data name="Recordings.FramesUnreadable"><value>⚠ 读不出</value></data>
+  <data name="Recordings.FramesWithFd"><value>{0} ({1} FD)</value></data>
+  <data name="Recordings.Volume.Damaged"><value>⚠ {0} 的录制卷读不出来：文件已损坏（详细原因已写进日志）</value></data>
+  <data name="Recordings.Volume.Newer"><value>⚠ {0} 的录制卷读不出来：由更新版本的 diCAN 写入，请更新 diCAN</value></data>
+  <data name="Recordings.Volume.Unreadable"><value>⚠ {0} 的录制卷读不出来（详细原因已写进日志）</value></data>
+  <data name="Recordings.Unfinished"><value>未结束</value></data>
+  <data name="Recordings.Scope.Filtered"><value>仅过滤通过的帧</value>                                                                                                                                                                                   </data>
+  <data name="Recordings.Scope.Everything"><value>全部</value></data>
+  <data name="Recordings.Column.Started"><value>开始时间</value></data>
+  <data name="Recordings.Column.Duration"><value>时长</value></data>
+  <data name="Recordings.Column.Scope"><value>范围</value></data>
+  <data name="Recordings.Column.Frames"><value>帧数</value></data>
+  <data name="Recordings.Column.Device"><value>适配器</value></data>
+  <data name="Recordings.From"><value>从</value></data>
+  <data name="Recordings.To"><value>到</value></data>
+  <data name="Recordings.OpenCalendar"><value>打开日历</value>                                                                                                                                                                                                                            </data>
+  <data name="Recordings.Query"><value>查询</value></data>
+  <data name="Recordings.DateHint"><value>yyyy-MM-dd</value></data>
+  <data name="Recordings.Filter.Summary"><value>显示 {0} / 共 {1} 条</value></data>
+  <data name="Recordings.Empty.Filtered"><value>这个日期范围里没有记录。清空日期即可看到全部。</value>                                                                                                                                                                                                                          </data>
+  <data name="Menu.Tools.Recordings"><value>录制管理…</value></data>
+  <data name="Menu.Tools.Options"><value>选项…</value></data>
+
+  <data name="Options.Title"><value>选项</value></data>
+  <data name="Options.Tab.Connection"><value>连接</value></data>
+  <data name="Options.Tab.Display"><value>显示</value></data>
+  <data name="Options.Tab.Recording"><value>录制</value></data>
+  <data name="Options.RecordFilteredOnly"><value>只录过滤通过的帧</value></data>
+  <data name="Options.RecordFilteredOnlyNote"><value>勾上时，每一次过滤变更都会写进录制里，所以事后能解释某一段为什么缺了某些 ID。取消勾选则录整条总线。</value></data>
+  <data name="Options.RecordRawText"><value>保留原始 slcan 文本</value></data>
+  <data name="Options.RecordRawTextNote"><value>为每一帧再存一份适配器原样发来的文本。将来解码器修好后还能重新读一遍这段采集。它会让文件明显变大，在 CAN FD 上大得多。</value></data>
+  <data name="Options.AutoReconnect"><value>意外断开后自动重连</value></data>
+  <data name="Options.AutoReconnectNote"><value>默认关闭：它会让适配器重新回到总线上。你按「断开」时不触发；录制会继续。</value></data>
+  <data name="Options.AttemptsLabel"><value>放弃前尝试次数：</value></data>
+  <data name="Options.DelayLabel"><value>每次尝试间隔（毫秒）：</value></data>
+  <data name="Options.PollLabel"><value>设备列表刷新间隔（毫秒）：</value></data>
+  <data name="Options.CapacityLabel"><value>帧流保留的帧数：</value></data>
+  <data name="Options.PollNote"><value>调小可以让刚插上的适配器更快出现。一次扫描远不到一毫秒。</value></data>
+  <data name="Options.CapacityNote"><value>缓冲区满后，每个新帧会覆盖最旧的一帧。增大容量会按比例增加内存占用。</value></data>
+  <data name="Options.RestartNote"><value>「设备列表刷新间隔」与「帧流保留的帧数」需重启，其余立即生效。</value></data>
+  <data name="Reconnect.GaveUp"><value>重连失败，已尝试 {0} 次。按「连接」可以再试。</value></data>
+  <data name="Reconnect.Trying"><value>正在重连…… 第 {0} 次，共 {1} 次</value></data>
+  <data name="Toolbar.StopRecord"><value>停止录制</value></data>
+  <data name="Toolbar.Display"><value>显示设置…</value></data>
+
+  <data name="Grid.Id"><value>ID</value></data>
+  <data name="Grid.Dir"><value>方向</value></data>
+  <data name="Grid.Len"><value>长度</value></data>
+  <data name="Grid.LenNote"><value>数据长度，单位为字节。远程帧显示的是它请求的字节数 —— 这是该帧的长度含义。</value>                              </data>
+  <data name="Grid.Type"><value>帧型</value></data>
+  <data name="Grid.TypeNote"><value>普通的经典数据帧留空，而绝大多数帧都是这一种。FD 是 CAN FD 帧，FD BRS 是 CAN FD 且数据段加速，RTR 是不带数据的远程请求帧。标准帧与扩展帧不在这一列区分，而是看 ID 列：标准是三个十六进制字符，扩展是八个。</value>                                                       </data>
+  <data name="Grid.Data"><value>数据</value></data>
+  <data name="Grid.Period"><value>周期（均值）</value></data>
+  <data name="Grid.Count"><value>计数</value></data>
+  <data name="Grid.Delta"><value>Δ ms</value></data>
+  <data name="Grid.MinDelta"><value>min Δ</value></data>
+  <data name="Grid.MaxDelta"><value>max Δ</value></data>
+  <data name="Grid.Time"><value>时间</value></data>
+  <data name="Grid.CopyId"><value>复制 ID</value>                                                                                                                                                               </data>
+  <data name="Grid.CopyData"><value>复制帧数据</value>                                                               </data>
+  <data name="Grid.AddToQueue"><value>添加到发送队列</value>                                                                                                                                </data>
+
+  <data name="Toolbar.View"><value>视图</value></data>
+  <data name="Tab.ById"><value>按 ID 聚合</value></data>
+  <data name="Tab.Stream"><value>帧流</value></data>
+  <data name="Stream.Gap"><value>—— 此处有 {0:N0} 帧未显示 ——</value></data>
+  <data name="Detail.Empty"><value>选中一行可看它的完整数据。</value></data>
+
+  <data name="Display.Title"><value>显示设置</value></data>
+  <data name="Display.Group.Both"><value>两个视图</value></data>
+  <data name="Display.Id.Hex"><value>十六进制</value></data>
+  <data name="Display.Id.Decimal"><value>十进制</value></data>
+  <data name="Display.Data.Packed"><value>1E6953</value></data>
+  <data name="Display.Data.Spaced"><value>1E 69 53</value></data>
+  <data name="Display.Time.Elapsed"><value>经过时间</value></data>
+  <data name="Display.Time.Gap"><value>与上一行的间隔</value></data>
+  <data name="Display.MinMax"><value>min Δ / max Δ</value></data>
+  <data name="Display.DeltaNote"><value>两者都是同一个 ID 前后两帧之间的间隔。它们由主机侧时间戳算出，抖动约 ±100 µs。忙总线上「min Δ」常显示 0.0 —— 那是时间戳分辨率，不是总线的性质。</value></data>
+  <data name="Display.OwnFrames"><value>自己发出的帧</value></data>
+  <data name="Display.OwnFramesNote"><value>含周期发送。</value></data>
+  <data name="Display.Highlight"><value>变化高亮</value></data>
+  <data name="Display.DeltaTimeNote"><value>与上一行的间隔。首行以及「未显示」提示之后为空 —— 那里没有可比的对象。</value></data>
+  <data name="Display.FontSize"><value>字号</value></data>
+  <data name="History.Filter"><value>最近用过的过滤器</value></data>
+  <data name="History.RemoveTip"><value>从保存的历史中删除这一条</value></data>
+  <data name="History.ClearAll"><value>清空全部历史</value></data>
+  <data name="History.ClearAll.Title"><value>清空过滤历史</value></data>
+  <data name="History.ClearAll.Message"><value>将删除全部 {0} 条已保存的过滤器，含列表中未显示的部分。此操作无法撤销。</value></data>
+  <data name="History.ClearAll.Confirm"><value>全部删除</value></data>
+  <data name="History.ClearAll.Failed"><value>历史未能删除，数据仍保存在磁盘上。</value></data>
+
+  <data name="Record.NotWired">
+    <value>diCAN 无法打开这台电脑上的录制数据库，因此帧未被保存。详细原因已写入日志。</value>
+  </data>
+  <data name="Export.Title"><value>导出</value></data>
+  <data name="Export.Format"><value>格式</value></data>
+  <data name="Export.Csv"><value>CSV —— Excel 直接打开</value></data>
+  <data name="Export.Csv.Hint"><value>装得下全部：CAN FD、数据段加速、远程帧、收发方向，以及录制时保留的原始 slcan 文本。</value></data>
+  <data name="Export.Trc"><value>TRC —— PEAK PCAN-View</value></data>
+  <data name="Export.Trc.Hint"><value>经典 CAN 之外，CAN FD 与远程帧也会写入，已按 PEAK 公开的格式规范核对（未用 PEAK 软件打开过）。</value></data>
+  <data name="Export.Failed"><value>导出失败，详细原因已写进日志。</value></data>
+  <data name="Export.FileType.Csv"><value>CSV 文件</value></data>
+  <data name="Export.FileType.Trc"><value>TRC 文件</value></data>
+  <data name="Export.What"><value>录制</value></data>
+  <data name="Export.Save"><value>导出…</value></data>
+  <data name="Export.Done"><value>已导出。</value></data>
+  <data name="Export.Refused"><value>没有生成文件：本次录制里没有一帧能写进 TRC。请改导 CSV。</value></data>
+  <data name="Export.FilterNote">
+    <value>只有当前过滤放行的帧会被记录，所以导出的也只有这些。录制中改动过滤时，每次变更都会随录制一起存下来。</value>
+  </data>
+  <data name="Export.NotWired"><value>无法打开录制数据库，因此无法导出。详细原因已写入日志。</value></data>
+
+  <data name="Bottom.Detail"><value>详情</value></data>
+  <data name="Bottom.Send"><value>发送队列</value></data>
+  <data name="Bottom.Log"><value>会话日志</value></data>
+  <data name="Bottom.Fold"><value>折叠 / 展开底部面板</value></data>
+  <data name="Detail.Addressing"><value>寻址</value></data>
+  <data name="Detail.Standard"><value>11 位</value></data>
+  <data name="Detail.Extended"><value>29 位</value></data>
+  <data name="Detail.CopyPayload"><value>复制数据</value>                                                                                                                                                     </data>
+
+  <data name="Log.Clear"><value>清空列表</value></data>
+  <data name="Log.CopyRow"><value>复制这一行</value></data>
+  <data name="Log.CopyAll"><value>复制当前显示的全部</value></data>
+  <data name="Log.Save"><value>保存…</value></data>
+  <data name="Log.Event"><value>事件</value></data>
+  <data name="Log.ProblemsOnly"><value>只看警告与错误</value></data>
+  <data name="Log.Summary"><value>{0} 条</value></data>
+  <data name="Log.SummaryTruncated"><value>{0} 条，更早的已丢弃</value></data>
+  <data name="Log.SummaryFiltered"><value>{0} / {1} 条 · 只看警告与错误</value></data>
+  <data name="Log.Empty"><value>本次会话还没有发生任何事。打开会话、连接、录制、导出都会出现在这里。</value></data>
+  <data name="Log.NoProblems"><value>本次会话没有警告或错误。</value></data>
+
+  <data name="Transmit.BadInterval"><value>周期必须是大于 0 的整数毫秒。</value></data>
+
+  <data name="Tx.Add"><value>添加</value></data>
+  <data name="Tx.Duplicate"><value>复制</value></data>
+  <data name="Tx.Remove"><value>删除</value></data>
+  <data name="Tx.Import"><value>导入</value></data>
+  <data name="Tx.Export"><value>导出</value></data>
+  <data name="Tx.NotYet"><value>尚未启用：文件格式还没定下来。</value></data>
+  <data name="Tx.ResetCounters"><value>全部清零</value></data>
+  <data name="Tx.PauseToEdit"><value>请先暂停此行再修改 —— 正在发送时只有「名称」可以编辑。</value></data>
+  <data name="Tx.ResetRowCounter"><value>本行清零</value></data>
+  <data name="Tx.NoSession"><value>没有打开的会话。发送队列属于会话：连上适配器之后它就出现在这里。</value></data>
+  <data name="Tx.EmptyQueue"><value>队列是空的。按「添加」新建一行 —— 各列的含义看「?」。</value></data>
+  <data name="Tx.Hint"><value>按「添加」新建一行。新行是关着的，勾上「启用」之前不会有任何东西上总线 —— 先把 ID、数据和周期填好。次数留空表示一直发到停下，填 1 表示只发一次。
+
+在 ID 列里，八个十六进制字符的 ID 是 29 位扩展帧，字符更少是 11 位标准帧；放不进 11 位的 ID 会被拒绝 —— 写满八个字符才会按 29 位发出。
+
+「发一次」立刻发出一帧，不管这一行有没有启用。</value></data>
+  <data name="Tx.Enabled"><value>启用</value></data>
+  <data name="Tx.StateLegend"><value>· 未开始　▶ 发送中　‖ 已暂停　✓ 已完成</value></data>
+  <data name="Transport.RejectedWithReason"><value>适配器拒绝了「{0}」。{1}</value></data>
+  <data name="Transport.Rejected"><value>适配器拒绝了「{0}」，且没有说明原因。</value></data>
+  <data name="Transport.NotOnBus"><value>适配器还没有上 CAN 总线。</value></data>
+  <data name="Transport.NoAnswer"><value>适配器在 {1:0.#} 秒内没有回应「{0}」。每一代 slcan 固件都会回应命令或版本查询，所以这个串口多半不是 slcan 适配器。</value></data>
+  <data name="Transport.NoTimingLimits"><value>这个适配器没有报告 CAN 时钟与位时序限值，因此算不出{0}段的采样点。不指定采样点即可使用适配器自己的时序表。</value></data>
+  <data name="Transport.NoExactTiming"><value>这个适配器的 {0} MHz CAN 时钟在{2}段无法精确产生 {1} bit/s，因此不存在对应的位时序。</value></data>
+  <data name="Transport.UnsupportedNominal"><value>这个适配器不支持 {0}。它支持 {1}。⛔ 什么都没有发出。</value></data>
+  <data name="Transport.UnsupportedData"><value>此适配器不支持 {0} 的数据段速率。它支持 {1}。⚠ 板载收发器支持的速率上限可能低于此列表中的值。⛔ 未发送任何内容。</value></data>
+  <data name="Transport.Phase.Arbitration"><value>仲裁</value></data>
+  <data name="Transport.Phase.Data"><value>数据</value></data>
+  <data name="Transport.NotOpen"><value>传输通道还未建立。</value></data>
+  <data name="Transport.AlreadyOpen"><value>传输通道已经建立。</value></data>
+  <data name="Transport.GsUsb.NoExactNominal"><value>此设备无法利用其 {1} Hz CAN 时钟精确实现 {0} bit/s 的速率。</value></data>
+  <data name="Transport.GsUsb.NoExactData"><value>此设备无法精确实现 {0} bit/s 的数据段速率。</value></data>
+  <data name="Transport.GsUsb.NoEchoes"><value>已经交给适配器的 {0} 帧，在 {1:0.#} 秒内一帧都没有得到确认。总线可能没有端接、处于 bus-off，或者没有另一个节点来应答。</value></data>
+  <data name="Transport.GsUsb.NoLimitsAnswer"><value>设备没有回应位时序限值的查询。</value></data>
+  <data name="Transport.GsUsb.NoOneShot"><value>这个设备无法关闭自动重传：它不支持 gs_usb 的单次发送（one-shot）模式。请保持自动重传开启，或换一个支持它的适配器。</value></data>
+  <data name="FilterError.Part.Id"><value>ID</value></data>
+  <data name="FilterError.Part.Mask"><value>掩码</value></data>
+  <data name="FilterError.Empty"><value>过滤器不能为空。格式是 &lt;ID&gt;:&lt;掩码&gt;，例如 7E0:7FF。</value></data>
+  <data name="FilterError.NoColon"><value>「{0}」里没有冒号。格式是 &lt;ID&gt;:&lt;掩码&gt;，例如 7E0:7FF。</value></data>
+  <data name="FilterError.TwoColons"><value>「{0}」里有不止一个冒号。多个过滤器请用分号 ; 隔开。</value></data>
+  <data name="FilterError.IdTooLarge"><value>ID {0} 放不进 {1} 位（最大是 {2}）。</value></data>
+  <data name="FilterError.MaskTooLarge"><value>掩码 {0} 放不进 {1} 位（最大是 {2}）。</value></data>
+  <data name="FilterError.PartMissing"><value>缺少 {0}。格式是 &lt;ID&gt;:&lt;掩码&gt;，例如 7E0:7FF。</value></data>
+  <data name="FilterError.PartTooLong"><value>{0}「{1}」有 {2} 个十六进制字符，而它最多只能有 {3} 个。</value></data>
+  <data name="FilterError.PartNotHex"><value>{0}「{1}」不是十六进制。直接写，不要加 0x —— 写 7E0，不是 0x7E0。</value></data>
+  <data name="SendError.IdNotHex"><value>「{0}」不是十六进制 CAN ID。请使用数字 0–9 和字母 A–F 输入 ID。</value></data>
+  <data name="SendError.IdTooLarge"><value>{0} 超过了 29 位 ID 的最大值 {1}。请输入不超过此上限的 ID。</value></data>
+  <data name="SendError.IdTooLargeStandard"><value>{0} 超过了 {1} —— 11 位 ID 的最大值。ID 写满 8 个十六进制字符即为 29 位。</value></data>
+  <data name="SendError.FdHasNoRemote"><value>CAN FD 没有远程帧。「帧型」列里两者只能选其一。</value></data>
+  <data name="SendError.BrsNeedsFd"><value>数据段加速只存在于 CAN FD。请把「帧型」列改成 FD BRS，或换一个不带 BRS 的帧型。</value></data>
+  <data name="SendError.OddHexDigits"><value>数据需要偶数个十六进制字符，每个字节两个字符。</value></data>
+  <data name="SendError.DataNotHex"><value>「{0}」不是十六进制。每个数据字节请仅使用数字 0–9 和字母 A–F。</value></data>
+  <data name="SendError.DataTooLongFd"><value>{0} 字节超过了 CAN FD 帧可容纳的 {1} 字节。请缩短数据，使其不超过此限制。</value></data>
+  <data name="SendError.DataTooLongClassic"><value>{0} 字节超过了经典 CAN 帧能装的 {1} 字节。要发更长的数据，请把「帧型」列改成 FD。</value></data>
+  <data name="SendError.NoSuchFdLength"><value>CAN FD 不支持恰好 {0} 字节的数据长度。请选择以下长度之一：0 到 8、12、16、20、24、32、48 或 64 字节。</value></data>
+  <data name="SendError.RemoteHasNoData"><value>远程帧不带数据。请清空数据，或取消勾选「远程」。</value></data>
+  <data name="SendError.RemoteLengthMissing"><value>远程帧要写明它请求多少字节，0 到 {0}。</value></data>
+  <data name="SendError.RemoteLengthNotNumber"><value>「{0}」不是整数字节数。</value></data>
+  <data name="SendError.RemoteLengthTooLarge"><value>远程帧只能请求 0 到 {0} 字节，不是 {1}。</value></data>
+  <data name="Transport.GsUsb.NoFd"><value>给了数据段速率，但这个设备不支持 CAN FD。</value></data>
+  <data name="Transport.GsUsb.NoDataLimits"><value>这个设备自称支持 CAN FD，却没有给出数据段的位时序限值。</value></data>
+  <data name="Error.ContactSupport"><value>错误编号：{0}，请联系 DSD TECH 团队处理。</value></data>
+  <data name="Transport.Legacy.NoSamplePoint"><value>这个适配器的位时序来自固件里的表，因此采样点无法选择。不指定它即可使用适配器自己的值。</value></data>
+  <data name="Transport.Legacy.UnsupportedNominal"><value>{0} 不支持 {1}。它支持 {2}。⛔ 什么都没有发出：这个固件会忽略它不支持的速率并保留原来那个。</value></data>
+  <data name="Transport.Legacy.UnsupportedData"><value>{0} 不支持 {1} 的数据段。它支持 {2}。⛔ 什么都没有发出。</value></data>
+  <data name="Transport.Legacy.NoFd"><value>这个适配器跑的是 CANable 1.0，完全不支持 CAN FD。CAN FD 帧发不出去，而这个固件既不会发也不会拒绝。</value></data>
+  <data name="Transport.Legacy.NoSuchMode"><value>旧世代固件没有「{0}」模式。它只提供「正常」与「监听」；内部与外部环回是 ElmueSoft 2.5 的功能。</value></data>
+  <data name="Slcan.Err.InvalidCommand"><value>命令无效。</value></data>
+  <data name="Slcan.Err.InvalidParameter"><value>其中一个参数无效。</value></data>
+  <data name="Slcan.Err.MustBeOpen"><value>要先打开适配器。</value></data>
+  <data name="Slcan.Err.MustBeClosed"><value>要先关闭适配器。</value></data>
+  <data name="Slcan.Err.FirmwareInternal"><value>设备固件报告了一个内部错误。</value></data>
+  <data name="Slcan.Err.Unsupported"><value>这块板子不支持该功能。</value></data>
+  <data name="Slcan.Err.SendBufferFull"><value>设备的发送缓冲区已满。</value></data>
+  <data name="Slcan.Err.BusOff"><value>CAN 控制器处于 bus-off 状态，无法发送。</value></data>
+  <data name="Slcan.Err.SilentMode"><value>总线监听模式下不能发送。</value></data>
+  <data name="Slcan.Err.NoBitrate"><value>尚未设置速率，无法打开适配器。</value></data>
+  <data name="Slcan.Err.OptionBytes"><value>写入选项字节失败。</value></data>
+  <data name="Slcan.Err.ReplugRequired"><value>拔下并重新插上 USB 线才能完成。</value></data>
+  <data name="Slcan.Err.OutOfRange"><value>某个参数超出了有效范围。</value></data>
+  <data name="Slcan.Err.Unrecognised"><value>设备报告了一个本程序不认识的错误码。</value></data>
+  <data name="Tx.Name"><value>名称</value></data>
+  <data name="Tx.NamePlaceholder"><value>未命名</value></data>
+  <data name="Tx.Kind.Classic"><value>经典</value></data>
+  <data name="Tx.Kind.Fd"><value>FD</value></data>
+  <data name="Tx.Kind.FdBrs"><value>FD BRS</value></data>
+  <data name="Tx.Kind.Remote"><value>远程</value></data>
+  <data name="Tx.RemoteNoData"><value>—</value></data>
+  <data name="Tx.Length"><value>长度</value></data>
+  <data name="Tx.Period"><value>周期</value></data>
+  <data name="Tx.Repeat"><value>次数</value></data>
+  <data name="Tx.Action"><value>操作</value></data>
+  <data name="Tx.SendNow"><value>发一次</value></data>
+  <data name="Tx.QueueSummary"><value>已启用 {0}/{1} · 预期 {2} 帧/秒</value></data>
+  <data name="Periodic.PauseAll"><value>全部暂停</value></data>
+  <data name="Periodic.ResumeAll"><value>全部恢复</value></data>
+  <data name="Periodic.ListenOnly"><value>本次会话是监听模式，所以这里什么都发不出去。</value></data>
+
+  <data name="Send.Sent"><value>已发</value></data>
+  <data name="Send.TasksSummary"><value>{0} 条任务 · 已发 {1} 帧</value></data>
+  <data name="Send.SkippedNote"><value>已跳过 {0} 次发送：本机无法按所设周期及时发送，总线上的实际发送频率低于显示值。</value></data>
+  <data name="Send.TaskFailed"><value>任务 {0} 发送失败：{1}</value></data>
+  <data name="Send.ListenOnlyNote"><value>本次会话以「监听」方式打开，发送已禁用。要发帧请重新连接并改选总线模式。</value></data>
+
+  <data name="Status.NoSession"><value>就绪 —— 没有打开的会话</value></data>
+  <data name="Status.Disconnected"><value>{0} —— 已断开。表格显示的是断开前采集到的数据，不再更新。</value></data>
+  <data name="Status.Paused"><value>{0} —— 已暂停。表格停止刷新，接收与统计仍在继续，不会丢帧。</value>                                                            </data>
+  <data name="Status.Recording"><value>正在录制</value></data>
+  <data name="Filter.Label"><value>过滤</value></data>
+  <data name="Filter.Hint"><value>id:mask，多条用「;」隔开。7E0:7FF 是一个 ID，700:700 是范围，留空显示全部。在过滤框里，三个及以内的十六进制字符是 11 位 ID，四个及以上是 29 位。</value></data>
+  <data name="Filter.AllIds"><value>{0} 个 ID</value></data>
+  <data name="Filter.ShownOfTotal"><value>显示 {0} 个 / 共 {1} 个 ID</value></data>
+  <data name="Filter.Title"><value>过滤</value></data>
+  <data name="FirmwareNotice.Title"><value>有更新的固件可用</value></data>
+  <data name="FirmwareNotice.Intro"><value>本适配器内置的是 CANable 原厂固件，DSD TECH 为这款适配器发布了功能更完整的固件：</value></data>
+  <data name="FirmwareNotice.Crystal"><value>时钟改用板载 24 MHz 晶振</value></data>
+  <data name="FirmwareNotice.ErrorCounters"><value>能报告总线错误计数</value></data>
+  <data name="FirmwareNotice.OtherFixes"><value>其它固件缺陷修复</value></data>
+  <data name="FirmwareNotice.CanFd"><value>支持 CAN FD</value></data>
+  <data name="FirmwareNotice.ModesHonoured"><value>「监听」与「环回」真正生效</value></data>
+  <data name="FirmwareNotice.StaleFrames"><value>不再把没发出去的帧留到下一次连接</value></data>
+  <data name="FirmwareNotice.How"><value>新固件与升级步骤见这块板子的产品页：</value></data>
+  <data name="FirmwareNotice.DontShowAgain"><value>下次不再显示</value></data>
+  <data name="FirmwareNotice.Continue"><value>继续</value></data>
+  <data name="Filter.Collapse"><value>收起过滤面板</value></data>
+  <data name="Filter.Expand"><value>展开过滤面板</value></data>
+  <data name="Filter.Clear"><value>清除过滤</value></data>
+  <data name="Status.Rate"><value>{0:N0} 帧/秒 · 总线 ~{1:0}%</value></data>
+  <data name="Status.PeriodNote"><value>周期是均值。主机侧时间戳带约 100 微秒抖动，因此它不是总线级测量。</value></data>
+
+  <data name="Warn.NotConfirmed"><value>本适配器不应答命令，diCAN 无法确认速率是否已生效。界面显示的是请求值，不是设备报告的值。</value></data>
+
+  <data name="Device.Model.Slcan"><value>CANable slcan</value></data>
+  <data name="Device.Model.LegacyCanable1"><value>CANable 1.0 固件</value></data>
+
+  <data name="Device.Model.Candlelight"><value>candlelight</value></data>
+  <data name="Device.Model.Bootloader"><value>STM32 ROM 引导程序</value></data>
+  <data name="Device.Model.Unknown"><value>无法识别的设备</value></data>
+  <data name="Guidance.Family.Stm32G431"><value>STM32G431（SH-C31x / C31Bx / C31Cx / C32x）：</value></data>
+  <data name="Guidance.Family.Stm32F072"><value>STM32F072（SH-C30x）：</value></data>
+
+  <data name="Guidance.Ready"><value>就绪：diCAN 可以打开这台适配器。</value>                                                                                                                                                                                                                                                                                      </data>
+  <data name="Guidance.BootloaderUnplugTerminalBlock"><value>拔掉 CAN 端子，然后拔下并重新插上 USB，期间保持 CAN 端子断开。这颗芯片上 BOOT0 同时也是 CAN_RX，空闲总线会把它拉高，上电瞬间就进了 ROM 而不是固件。</value></data>
+  <data name="Guidance.BootloaderCheckBoot0Jumper"><value>把板子自己的 BOOT0 跳线或拨钮拨回去。这颗芯片有独立的 BOOT0 引脚，所以不可能是 CAN 总线造成的。</value></data>
+  <data name="Guidance.BootloaderDisableBoot0Permanently"><value>等固件重新跑起来之后，用 slcan 命令 *Boot0:Off 永久关掉 BOOT0。</value></data>
+  <data name="Guidance.BootloaderRescan"><value>然后重新扫描：适配器应显示为 slcan 或 candlelight 设备。</value></data>
+  <data name="Guidance.ReflashToSlcan25"><value>刷成 CANable 2.5 Slcan 构建，它就会以 COM 口出现（USB 16D0:117E）。</value></data>
+  <data name="Guidance.F072CannotRunSlcan25"><value>这块板子无论哪个版本都跑不了 CANable 2.5。它唯一的 slcan 固件是原版 canable-fw。</value>                                                                                                                                                                                                                                             </data>
+  <data name="Guidance.Legacy1ConfirmsNothing"><value>这是原版 CANable 1.0 固件。它不应答任何命令，所以 diCAN 无法确认发出去的设置是否真的生效。</value></data>
+  <data name="Guidance.Legacy1NoCanFd"><value>它完全不支持 CAN FD。</value></data>
+  <data name="Guidance.NoPortCheckDriverBinding"><value>已识别，但 Windows 没有给它分配 COM 口。到设备管理器看这台设备上有没有感叹号：那是驱动问题，不是设备坏了。</value></data>
+  <data name="Guidance.NoSerialNodePublished"><value>已识别，但系统没有为它生成串口设备，因而没有可打开的对象。重新插拔一次，或换个接口、换根线试试。</value></data>
+  <data name="Guidance.NothingFoundUsualCauses"><value>diCAN 未将此 USB 设备识别为 CAN 适配器。常见原因包括：USB 线仅供电、不传输数据，USB 集线器未完成枚举，或设备被枚举为其他类型。</value></data>
+</root>

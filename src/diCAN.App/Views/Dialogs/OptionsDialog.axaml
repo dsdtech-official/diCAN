@@ -1,0 +1,146 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        xmlns:loc="using:DiCAN.App.Localization"
+        mc:Ignorable="d" d:DesignWidth="560" d:DesignHeight="400"
+        x:Class="DiCAN.App.Views.Dialogs.OptionsDialog"
+        x:DataType="dialogs:OptionsDialogViewModel"
+        Title="{Binding Title}"
+        Width="600" Height="440"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+
+  <Window.Resources>
+
+    <SolidColorBrush x:Key="TabItemHeaderBackgroundSelected" Color="Transparent" />
+    <SolidColorBrush x:Key="TabItemHeaderBackgroundUnselected" Color="#14000000" />
+    <SolidColorBrush x:Key="TabItemHeaderSelectedPipeFill" Color="Transparent" />
+  </Window.Resources>
+
+  <Grid RowDefinitions="*,Auto" Margin="16">
+
+    <TabControl Grid.Row="0" Classes="settings">
+
+      <TabItem Header="{Binding TabConnection}">
+        <Border Classes="tabPane">
+          <StackPanel Spacing="10">
+
+            <Grid ColumnDefinitions="*,Auto">
+              <CheckBox Grid.Column="0" Content="{Binding AutoReconnectLabel}"
+                        IsChecked="{Binding AutoReconnect}" />
+
+              <Button Grid.Column="1" Padding="7,1" Content="?" VerticalAlignment="Center">
+                <Button.Flyout>
+                  <Flyout Placement="BottomEdgeAlignedRight">
+                    <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                               Text="{loc:Translate Options.AutoReconnectNote}" />
+                  </Flyout>
+                </Button.Flyout>
+              </Button>
+            </Grid>
+
+            <Grid ColumnDefinitions="Auto,110" RowDefinitions="Auto,Auto"
+                  ColumnSpacing="12" RowSpacing="8" Margin="26,0,0,6"
+                  IsEnabled="{Binding AutoReconnect}">
+              <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+                         Text="{Binding AttemptsLabel}" />
+              <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ReconnectAttempts}" />
+
+              <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                         Text="{Binding DelayLabel}" />
+              <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ReconnectDelayMs}" />
+            </Grid>
+
+            <Separator Margin="0,4" />
+
+            <Grid ColumnDefinitions="Auto,110,*,Auto" ColumnSpacing="12">
+              <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                         Text="{Binding PollLabel}" />
+              <TextBox Grid.Column="1" Text="{Binding DevicePollMs}" />
+
+              <Button Grid.Column="3" Padding="7,1" Content="?" VerticalAlignment="Center">
+                <Button.Flyout>
+                  <Flyout Placement="BottomEdgeAlignedRight">
+                    <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                               Text="{loc:Translate Options.PollNote}" />
+                  </Flyout>
+                </Button.Flyout>
+              </Button>
+            </Grid>
+          </StackPanel>
+        </Border>
+      </TabItem>
+
+      <TabItem Header="{Binding TabDisplay}">
+        <Border Classes="tabPane">
+          <StackPanel Spacing="10" VerticalAlignment="Top">
+
+            <Grid ColumnDefinitions="Auto,110,*,Auto" ColumnSpacing="12">
+              <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                         Text="{Binding CapacityLabel}" />
+              <TextBox Grid.Column="1" Text="{Binding StreamCapacity}" />
+
+              <Button Grid.Column="3" Padding="7,1" Content="?" VerticalAlignment="Center">
+                <Button.Flyout>
+                  <Flyout Placement="BottomEdgeAlignedRight">
+                    <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                               Text="{loc:Translate Options.CapacityNote}" />
+                  </Flyout>
+                </Button.Flyout>
+              </Button>
+            </Grid>
+          </StackPanel>
+        </Border>
+      </TabItem>
+
+      <TabItem Header="{Binding TabRecording}">
+        <Border Classes="tabPane">
+          <StackPanel Spacing="10" VerticalAlignment="Top">
+
+            <Grid ColumnDefinitions="*,Auto">
+              <CheckBox Grid.Column="0" Content="{Binding RecordFilteredOnlyLabel}"
+                        IsChecked="{Binding RecordFilteredOnly}" />
+
+              <Button Grid.Column="1" Padding="7,1" Content="?" VerticalAlignment="Center">
+                <Button.Flyout>
+                  <Flyout Placement="BottomEdgeAlignedRight">
+                    <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                               Text="{loc:Translate Options.RecordFilteredOnlyNote}" />
+                  </Flyout>
+                </Button.Flyout>
+              </Button>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,Auto">
+              <CheckBox Grid.Column="0" Content="{Binding RecordRawTextLabel}"
+                        IsChecked="{Binding RecordRawText}" />
+
+              <Button Grid.Column="1" Padding="7,1" Content="?" VerticalAlignment="Center">
+                <Button.Flyout>
+                  <Flyout Placement="BottomEdgeAlignedRight">
+                    <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                               Text="{loc:Translate Options.RecordRawTextNote}" />
+                  </Flyout>
+                </Button.Flyout>
+              </Button>
+            </Grid>
+          </StackPanel>
+        </Border>
+      </TabItem>
+
+    </TabControl>
+
+    <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8" Margin="0,14,0,0">
+      <TextBlock Grid.Column="0" Classes="dim" VerticalAlignment="Center"
+                 TextWrapping="Wrap" Text="{Binding RestartNote}" />
+
+      <Button Grid.Column="1" MinWidth="88" IsCancel="True"
+              Content="{Binding CancelText}" Command="{Binding RejectCommand}" />
+      <Button Grid.Column="2" MinWidth="88" IsDefault="True"
+              Content="{Binding OkText}" Command="{Binding AcceptCommand}" />
+    </Grid>
+
+  </Grid>
+</Window>

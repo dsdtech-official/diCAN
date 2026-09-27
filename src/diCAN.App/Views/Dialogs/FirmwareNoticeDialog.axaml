@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:loc="using:DiCAN.App.Localization"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        mc:Ignorable="d" d:DesignWidth="560" d:DesignHeight="380"
+        x:Class="DiCAN.App.Views.Dialogs.FirmwareNoticeDialog"
+        x:DataType="dialogs:FirmwareNoticeViewModel"
+        Title="{Binding Title}"
+        Width="560" MinWidth="480" MaxWidth="680"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="24" Spacing="14">
+
+    <TextBlock Text="{Binding Title}" FontSize="19" FontWeight="SemiBold" />
+
+    <TextBlock Text="{Binding Intro}" TextWrapping="Wrap" LineHeight="22" />
+
+    <ItemsControl ItemsSource="{Binding Items}" Margin="8,0,0,0">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <Grid ColumnDefinitions="Auto,*" Margin="0,3">
+
+            <TextBlock Grid.Column="0" Text="&#x00B7;" Margin="0,0,8,0" />
+            <TextBlock Grid.Column="1" Text="{Binding}" TextWrapping="Wrap" LineHeight="22" />
+          </Grid>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+    <StackPanel Spacing="4">
+      <TextBlock Text="{Binding How}" TextWrapping="Wrap" LineHeight="22" />
+
+      <SelectableTextBlock Text="{Binding Url}" IsVisible="{Binding HasUrl}"
+                           TextWrapping="Wrap" LineHeight="22"
+                           FontFamily="Consolas,Menlo,monospace" />
+    </StackPanel>
+
+    <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+      <CheckBox Grid.Column="0" VerticalAlignment="Center"
+                IsChecked="{Binding DontShowAgain, Mode=TwoWay}"
+                Content="{loc:Translate FirmwareNotice.DontShowAgain}" />
+      <Button Grid.Column="1" x:Name="ContinueButton" MinWidth="96"
+              IsDefault="True" IsCancel="True"
+              Content="{loc:Translate FirmwareNotice.Continue}" Click="OnContinueClick" />
+    </Grid>
+  </StackPanel>
+</Window>

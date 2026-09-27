@@ -1,0 +1,231 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DiCAN.App.App"
+             Name="diCAN"
+             RequestedThemeVariant="Default">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+
+        <ResourceDictionary x:Key="Light">
+
+          <SolidColorBrush x:Key="DiCanSeparatorBrush" Color="#22000000" />
+
+          <SolidColorBrush x:Key="DiCanPanelBrush" Color="#0C000000" />
+
+          <SolidColorBrush x:Key="DiCanSafeSurfaceBrush" Color="#334CAF50" />
+
+          <SolidColorBrush x:Key="DiCanCautionSurfaceBrush" Color="#33FF9800" />
+
+          <SolidColorBrush x:Key="DiCanWarningSurfaceBrush" Color="#33F44336" />
+
+          <SolidColorBrush x:Key="DiCanErrorSurfaceBrush" Color="#33D13438" />
+
+          <SolidColorBrush x:Key="DiCanErrorForegroundBrush" Color="#B3261E" />
+
+          <SolidColorBrush x:Key="DiCanTxForegroundBrush" Color="#0B62C4" />
+
+          <SolidColorBrush x:Key="DiCanOpenPageForegroundBrush" Color="#0A5FBF" />
+
+          <SolidColorBrush x:Key="DiCanPlaceholderBrush" Color="#4A4A4A" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="DiCanSeparatorBrush" Color="#22FFFFFF" />
+          <SolidColorBrush x:Key="DiCanPanelBrush" Color="#18FFFFFF" />
+          <SolidColorBrush x:Key="DiCanPlaceholderBrush" Color="#B0B0B0" />
+          <SolidColorBrush x:Key="DiCanSafeSurfaceBrush" Color="#3344CC66" />
+          <SolidColorBrush x:Key="DiCanCautionSurfaceBrush" Color="#33FFAA00" />
+          <SolidColorBrush x:Key="DiCanWarningSurfaceBrush" Color="#33FF5555" />
+          <SolidColorBrush x:Key="DiCanErrorSurfaceBrush" Color="#33D13438" />
+          <SolidColorBrush x:Key="DiCanErrorForegroundBrush" Color="#FFAA66" />
+          <SolidColorBrush x:Key="DiCanTxForegroundBrush" Color="#6FB8FF" />
+          <SolidColorBrush x:Key="DiCanOpenPageForegroundBrush" Color="#6DB3FF" />
+        </ResourceDictionary>
+
+      </ResourceDictionary.ThemeDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+
+    <Style Selector="TextBlock.mono">
+      <Setter Property="FontFamily" Value="Consolas,Menlo,DejaVu Sans Mono,monospace" />
+    </Style>
+
+    <Style Selector="TextBox.mono">
+      <Setter Property="FontFamily" Value="Consolas,Menlo,DejaVu Sans Mono,monospace" />
+    </Style>
+
+    <Style Selector="ComboBox.mono">
+      <Setter Property="FontFamily" Value="Consolas,Menlo,DejaVu Sans Mono,monospace" />
+    </Style>
+
+    <Style Selector="TextBlock.dim">
+      <Setter Property="Opacity" Value="0.6" />
+    </Style>
+
+    <Style Selector="TabControl.settings">
+      <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style Selector="TabControl.settings > TabItem">
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseLowBrush}" />
+      <Setter Property="BorderThickness" Value="1,1,1,0" />
+      <Setter Property="CornerRadius" Value="4,4,0,0" />
+      <Setter Property="Padding" Value="16,7" />
+      <Setter Property="Margin" Value="0,0,3,0" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style Selector="Border.tabPane">
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseLowBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="0,4,4,4" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="16" />
+      <Setter Property="Margin" Value="0,-1,0,0" />
+    </Style>
+
+    <Style Selector="Path.toolbarIcon">
+      <Setter Property="Stroke" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+      <Setter Property="StrokeThickness" Value="1.3" />
+      <Setter Property="StrokeLineCap" Value="Round" />
+      <Setter Property="StrokeJoin" Value="Round" />
+      <Setter Property="Width" Value="16" />
+      <Setter Property="Height" Value="16" />
+      <Setter Property="Stretch" Value="None" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Path.iconGo">
+      <Setter Property="Stroke" Value="#1D9E75" />
+    </Style>
+
+    <Style Selector="Path.iconStop">
+      <Setter Property="Stroke" Value="#D13438" />
+      <Setter Property="StrokeThickness" Value="1.8" />
+    </Style>
+
+    <Style Selector="Ellipse.recordingDot">
+      <Setter Property="Width" Value="8" />
+      <Setter Property="Height" Value="8" />
+      <Setter Property="Fill" Value="#D13438" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Path.iconClear">
+      <Setter Property="Stroke" Value="#C77700" />
+    </Style>
+
+    <Style Selector="Path.iconPause">
+      <Setter Property="Stroke" Value="#4B5EAA" />
+    </Style>
+
+    <Style Selector="Path.iconExport">
+      <Setter Property="Stroke" Value="#0E7C86" />
+    </Style>
+
+    <Style Selector="Button:disabled Path.toolbarIcon">
+      <Setter Property="Stroke" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.changed">
+      <Setter Property="Background" Value="{DynamicResource DiCanCautionSurfaceBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.tx">
+      <Setter Property="Foreground" Value="{DynamicResource DiCanTxForegroundBrush}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="TextBox.invalid">
+      <Setter Property="BorderBrush" Value="{DynamicResource DiCanErrorForegroundBrush}" />
+      <Setter Property="BorderThickness" Value="1.5" />
+    </Style>
+    <Style Selector="TextBox.invalid:pointerover /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="{DynamicResource DiCanErrorForegroundBrush}" />
+    </Style>
+    <Style Selector="TextBox.invalid:focus /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="{DynamicResource DiCanErrorForegroundBrush}" />
+    </Style>
+
+    <Style Selector="ToggleButton.segment">
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="14,5" />
+      <Setter Property="MinWidth" Value="0" />
+    </Style>
+
+    <Style Selector="ToggleButton.page">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="CornerRadius" Value="0,0,4,4" />
+      <Setter Property="Padding" Value="16,4" />
+      <Setter Property="MinWidth" Value="0" />
+    </Style>
+    <Style Selector="ToggleButton.page /template/ ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="ToggleButton.page:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource DiCanPanelBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.page:checked /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource DiCanPanelBrush}" />
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource DiCanOpenPageForegroundBrush}" />
+      <Setter Property="TextElement.FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="ToggleButton.page:checked:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource DiCanPanelBrush}" />
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource DiCanOpenPageForegroundBrush}" />
+    </Style>
+
+    <Style Selector="Button.flat">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="Button.flat /template/ ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Button.flat:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style Selector="TextBlock.problem">
+      <Setter Property="Foreground" Value="{DynamicResource DiCanErrorForegroundBrush}" />
+    </Style>
+    <Style Selector="SelectableTextBlock.problem">
+      <Setter Property="Foreground" Value="{DynamicResource DiCanErrorForegroundBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.heading">
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Margin" Value="0,0,0,4" />
+    </Style>
+
+    <Style Selector="Button.sessionCard">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="Padding" Value="16" />
+      <Setter Property="CornerRadius" Value="4" />
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Background" Value="{DynamicResource DiCanPanelBrush}" />
+    </Style>
+    <Style Selector="Button.sessionCard:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource DiCanPanelBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+    </Style>
+    <Style Selector="Button.sessionCard:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource DiCanPanelBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}" />
+    </Style>
+  </Application.Styles>
+
+</Application>

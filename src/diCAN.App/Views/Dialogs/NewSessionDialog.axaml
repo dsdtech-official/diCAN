@@ -1,0 +1,148 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        xmlns:vm="using:DiCAN.App.ViewModels"
+        xmlns:loc="using:DiCAN.App.Localization"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="620" d:DesignHeight="520"
+        x:Class="DiCAN.App.Views.Dialogs.NewSessionDialog"
+        x:DataType="dialogs:NewSessionDialogViewModel"
+        Title="{loc:Translate Dialog.NewSession.Title}"
+        Width="700" MinWidth="580" MaxWidth="800"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="20" Spacing="14">
+
+    <Grid ColumnDefinitions="*,Auto">
+      <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                 Text="{Binding SessionType.Title}" FontSize="17" FontWeight="SemiBold" />
+
+      <Button Grid.Column="1" Content="{Binding RescanLabel}" MinWidth="104"
+              Command="{Binding RescanCommand}" />
+    </Grid>
+
+    <Border Height="1" Background="{DynamicResource DiCanSeparatorBrush}" />
+
+    <StackPanel Spacing="6">
+
+      <Grid ColumnDefinitions="110,150,160,*" Margin="14,0,9,0">
+        <TextBlock Grid.Column="0" Classes="dim" FontSize="10.5" Text="{loc:Translate Dialog.Column.Note}" />
+        <TextBlock Grid.Column="1" Classes="dim" FontSize="10.5" Text="{loc:Translate Dialog.Column.Port}" />
+        <TextBlock Grid.Column="2" Classes="dim" FontSize="10.5" Text="{loc:Translate Dialog.Column.Model}" />
+        <TextBlock Grid.Column="3" Classes="dim" FontSize="10.5" Text="{loc:Translate Dialog.Column.Firmware}" />
+      </Grid>
+
+      <Border Height="1" Margin="0,2,0,0" Background="{DynamicResource DiCanSeparatorBrush}" />
+
+      <ListBox ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}"
+               Height="{Binding DeviceListHeight}"
+               DoubleTapped="OnDeviceDoubleTapped">
+        <ListBox.Styles>
+
+          <Style Selector="Grid.unusable">
+            <Setter Property="Opacity" Value="0.45" />
+          </Style>
+
+          <Style Selector="ListBoxItem">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+          </Style>
+        </ListBox.Styles>
+
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="vm:DeviceItemViewModel">
+
+            <Border BorderBrush="{DynamicResource DiCanSeparatorBrush}" BorderThickness="0,0,0,1"
+                    Padding="9,0" VerticalAlignment="Stretch">
+              <Grid ColumnDefinitions="110,150,160,*" VerticalAlignment="Center"
+                    Classes.unusable="{Binding !IsUsable}">
+
+                <TextBlock Grid.Column="0" Text="{Binding NoteText}" TextTrimming="CharacterEllipsis" />
+
+                <TextBlock Grid.Column="1" Text="{Binding PortText}" FontFamily="Consolas,Menlo,monospace"
+                           TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Column="2" Text="{Binding ModelLabel}" TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Column="3" Text="{Binding FirmwareLabel}" TextTrimming="CharacterEllipsis" />
+              </Grid>
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <TextBlock Text="{loc:Translate Dialog.Device.Detecting}"
+                 IsVisible="{Binding ShowDetecting}"
+                 Margin="4,8,4,0" Opacity="0.7" TextWrapping="Wrap" />
+
+      <TextBlock Text="{loc:Translate Dialog.Device.NoneSupported}"
+                 IsVisible="{Binding ShowNoDevices}"
+                 Margin="4,8,4,0" TextWrapping="Wrap"
+                 Foreground="{DynamicResource DiCanErrorForegroundBrush}" />
+    </StackPanel>
+
+    <Grid ColumnDefinitions="Auto,14,*" RowDefinitions="Auto,10,Auto">
+
+      <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+                 Text="{loc:Translate Dialog.Bitrate}" />
+
+      <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Spacing="10"
+                  VerticalAlignment="Center">
+
+        <ComboBox Width="112" ItemsSource="{Binding Bitrates}" SelectedItem="{Binding SelectedBitrate}"
+                  IsEnabled="{Binding CanChooseRates}"
+                  PlaceholderText="{loc:Translate Dialog.Bitrate.Placeholder}">
+          <ComboBox.ItemTemplate>
+            <DataTemplate x:DataType="dialogs:BitrateChoice">
+              <TextBlock Text="{Binding Label}" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <CheckBox IsChecked="{Binding UseDataBitrate}" IsEnabled="{Binding IsDataBitrateSupported}"
+                  Content="{loc:Translate Dialog.DataBitrate}" MinHeight="0"
+                  VerticalAlignment="Center" />
+
+        <ComboBox Width="112" ItemsSource="{Binding DataBitrates}"
+                  SelectedItem="{Binding SelectedDataBitrate}"
+                  IsEnabled="{Binding UseDataBitrate}"
+                  PlaceholderText="{Binding DataBitratePlaceholder}">
+          <ComboBox.ItemTemplate>
+            <DataTemplate x:DataType="dialogs:BitrateChoice">
+              <TextBlock Text="{Binding Label}" />
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+      </StackPanel>
+
+      <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"
+                 Text="{loc:Translate Dialog.BusMode}" />
+
+      <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Modes}"
+                SelectedItem="{Binding SelectedMode}" IsEnabled="{Binding CanChooseRates}"
+                HorizontalAlignment="Stretch"
+                PlaceholderText="{loc:Translate Dialog.BusMode.Placeholder}">
+        <ComboBox.ItemTemplate>
+          <DataTemplate x:DataType="dialogs:BusModeChoice">
+            <TextBlock Text="{Binding Label}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+    </Grid>
+
+    <Border Padding="12,8" Background="{DynamicResource DiCanErrorSurfaceBrush}" IsVisible="{Binding HasOpenError}">
+      <TextBlock Text="{Binding OpenError}" TextWrapping="Wrap" FontSize="12" />
+    </Border>
+
+    <Grid ColumnDefinitions="Auto,*,Auto">
+      <Button Grid.Column="0" Content="{loc:Translate Dialog.DetailedConfiguration}"
+              Command="{Binding ShowDetailedConfigurationCommand}" />
+
+      <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+        <Button Content="{loc:Translate Common.Cancel}" IsCancel="True" Command="{Binding CancelCommand}" />
+        <Button Content="{loc:Translate Common.Connect}" IsDefault="True" Command="{Binding ConfirmCommand}" />
+      </StackPanel>
+    </Grid>
+  </StackPanel>
+</Window>

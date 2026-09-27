@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>DiCAN.Infrastructure</RootNamespace>
+    <AssemblyName>diCAN.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\diCAN.Core\diCAN.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <InternalsVisibleTo Include="diCAN.Infrastructure.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <PackageReference Include="System.IO.Ports" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.10" />
+
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="$(SQLitePCLRawVersion)" />
+  </ItemGroup>
+
+</Project>

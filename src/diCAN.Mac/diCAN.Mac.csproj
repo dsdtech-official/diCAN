@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>DiCAN.Mac</RootNamespace>
+    <AssemblyName>diCAN.Mac</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\diCAN.Core\diCAN.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DiCanUsbSource>$(MSBuildProjectDirectory)/Native/dican_usb.c</DiCanUsbSource>
+    <DiCanUsbHeader>$(MSBuildProjectDirectory)/Native/dican_usb.h</DiCanUsbHeader>
+  </PropertyGroup>
+
+  <Target Name="ResolveDiCanUsbPath" Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <PropertyGroup>
+      <DiCanUsbDylib>$([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(IntermediateOutputPath), 'libdican_usb.dylib'))</DiCanUsbDylib>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="BuildDiCanUsb"
+          DependsOnTargets="ResolveDiCanUsbPath"
+          BeforeTargets="AssignTargetPaths"
+          Condition="$([MSBuild]::IsOSPlatform('OSX'))"
+          Inputs="$(DiCanUsbSource);$(DiCanUsbHeader);$(MSBuildProjectFullPath)"
+          Outputs="$([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(IntermediateOutputPath), 'libdican_usb.dylib'))">
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName($(DiCanUsbDylib)))" />
+    <Exec Command="xcrun clang -dynamiclib -arch arm64 -arch x86_64 -mmacosx-version-min=12.0 -O2 -Wall -Wextra -Werror -install_name @rpath/libdican_usb.dylib -framework IOKit -framework CoreFoundation &quot;$(DiCanUsbSource)&quot; -o &quot;$(DiCanUsbDylib)&quot;" />
+  </Target>
+
+  <Target Name="IncludeDiCanUsb"
+          DependsOnTargets="ResolveDiCanUsbPath;BuildDiCanUsb"
+          BeforeTargets="AssignTargetPaths"
+          Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <ItemGroup>
+      <None Include="$(DiCanUsbDylib)" Link="libdican_usb.dylib" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+  </Target>
+
+</Project>

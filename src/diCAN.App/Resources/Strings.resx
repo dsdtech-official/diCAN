@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" /></xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="Menu.File"><value>File</value></data>
+  <data name="Menu.File.Exit"><value>Exit</value></data>
+  <data name="Menu.Session"><value>Session</value></data>
+  <data name="Menu.Session.New"><value>New session…</value></data>
+  <data name="Menu.Session.Disconnect"><value>Disconnect</value></data>
+  <data name="Menu.Tools"><value>Tools</value></data>
+  <data name="Menu.Language"><value>Language ({0})</value>                                                                                                                                                                                                                                                                                                                                                  </data>
+
+  <data name="Menu.Help"><value>Help</value></data>
+  <data name="Menu.Help.About"><value>About diCAN</value></data>
+  <data name="About.Title"><value>About diCAN</value></data>
+  <data name="About.Message" xml:space="preserve"><value>diCAN — free and open-source CAN analyser software
+
+V{0}. One adapter, one bus: receive aggregated by id or as a frame stream, periodic and one-shot transmit, recording to a database and export. Written as the official companion software for the DSD TECH SH-C3x adapters.
+
+DongGuan DESHIDE TECHNOLOGY CO.,LTD
+东莞市德士德科技有限公司
+www.deshide.com    dsd_tech@outlook.com
+github.com/dsdtech-official/diCAN
+
+Licensed under Apache-2.0.
+"DSD TECH" is a registered trademark of DongGuan DESHIDE TECHNOLOGY CO.,LTD.
+The full notice is in the NOTICE and LICENSE files next to the executable.</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </data>
+
+  <data name="Empty.SelectSessionType"><value>Select connection type</value></data>
+
+  <data name="SessionType.Single.Title"><value>Single CAN port</value></data>
+  <data name="SessionType.Single.Description"><value>One adapter, one bus. Normal, listen only, and loopback where the firmware supports it.</value></data>
+
+  <data name="Mode.Normal"><value>Normal — transmits, receives and acknowledges (joins the bus)</value></data>
+  <data name="Mode.Silent"><value>Listen only — never acknowledges, safe on someone else's bus</value></data>
+  <data name="Mode.InternalLoopback"><value>Internal loopback — hears itself, nothing reaches the wire</value></data>
+  <data name="Mode.ExternalLoopback"><value>External loopback — frames go out and come back</value></data>
+
+  <data name="Mode.Short.Normal"><value>normal</value></data>
+  <data name="Mode.Short.Silent"><value>listen only</value></data>
+  <data name="Mode.Short.InternalLoopback"><value>internal loopback</value></data>
+  <data name="Mode.Short.ExternalLoopback"><value>external loopback</value></data>
+  <data name="Dialog.BusMode"><value>Bus mode</value></data>
+
+  <data name="Dialog.BusMode.Placeholder"><value>Select a mode</value></data>
+
+  <data name="Dialog.NewSession.Title"><value>New session</value></data>
+
+  <data name="Dialog.Column.Port"><value>Port</value></data>
+  <data name="Dialog.Column.Model"><value>Model</value></data>
+  <data name="Dialog.Column.Firmware"><value>Firmware</value></data>
+  <data name="Dialog.Column.Note"><value>Note</value></data>
+
+  <data name="Naming.Prompt"><value>This looks like a new adapter. Give it a name?</value></data>
+  <data name="Naming.Save"><value>Save</value></data>
+  <data name="Naming.Dismiss"><value>Not now</value></data>
+  <data name="Naming.SaveFailed"><value>Saving the name failed. The details have been written to the log.</value>                                                                                                                                                                                    </data>
+  <data name="Session.DeviceRecordSaveFailed"><value>Saving the adapter record failed. The details have been written to the log.</value>                                                                                                                             </data>
+  <data name="Session.ConnectionLost"><value>The connection was lost. The details have been written to the log.</value>                                                                                                                                   </data>
+  <data name="Record.StartFailed"><value>Starting the recording failed. The details have been written to the log.</value>                                                                                         </data>
+  <data name="Record.Faulted"><value>The recording stopped because of a fault. The details have been written to the log.</value>                                                                                                                                                                     </data>
+  <data name="Reconnect.Failed"><value>Reconnecting failed. The details have been written to the log.</value>                                                                                                                                                                             </data>
+
+  <data name="Dialog.Device.Detecting"><value>Detecting devices…</value></data>
+  <data name="Dialog.Device.NoneSupported"><value>No adapter found. Check whether the device is in bootloader mode (toggle the switch to change it).</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </data>
+  <data name="Device.State.NoPort"><value>Windows assigned no COM port</value></data>
+  <data name="Dialog.Bitrate.Placeholder"><value>Wait…</value>                                                                                                                                                                                                                                                                                                                                      </data>
+  <data name="Dialog.DataBitrate.Unsupported"><value>No FD</value>                                                                                                                                                                                                                                                                                                                                                                       </data>
+  <data name="Dialog.Device.Crystal.Yes"><value>crystal fitted</value></data>
+  <data name="Dialog.Device.Crystal.No"><value>no crystal</value></data>
+  <data name="Dialog.DataBitrate"><value>FD</value></data>
+  <data name="Dialog.DetailedConfiguration"><value>More settings…</value></data>
+  <data name="Dialog.Detailed.Title"><value>More settings</value></data>
+  <data name="Dialog.Detailed.SamplePoint"><value>Arbitration sample point</value></data>
+  <data name="Dialog.Detailed.SamplePoint.Default"><value>Default (75%)</value></data>
+
+  <data name="Dialog.Detailed.SamplePoint.Hint"><value>Must match the other nodes — higher is not better. A large enough mismatch passes classic frames while losing every CAN FD one, and reports no error.</value></data>
+  <data name="Dialog.Detailed.SamplePoint.Fixed"><value>This adapter's bit timing comes from its own firmware.</value></data>
+  <data name="Dialog.Detailed.Section.Bus"><value>Bus settings</value></data>
+  <data name="Dialog.Detailed.Retransmit"><value>Automatic retransmission</value></data>
+  <data name="Dialog.Detailed.Retransmit.Hint"><value>On, the adapter re-sends a frame nobody acknowledged. Off, it tries once. Can only be set before joining the bus.</value></data>
+  <data name="Dialog.Detailed.Section.Device"><value>What this adapter reported</value></data>
+  <data name="Dialog.Detailed.Section.Firmware"><value>Firmware update</value>                                                                                                                                   </data>
+  <data name="Dialog.Detailed.Dfu.Explain"><value>With this firmware, switch SW1 enters DFU mode only after you allow it here. Allowing lasts for the next power-up only.</value></data>
+  <data name="Dialog.Detailed.Dfu.Allow"><value>Allow DFU on next power-up</value></data>
+  <data name="Dialog.Detailed.Dfu.Allowed"><value>Allowed for the next power-up. For the update steps, see:</value>                                                                                                                                    </data>
+  <data name="Dialog.Detailed.Dfu.Failed"><value>The adapter did not confirm it. Close any session using this adapter, replug it, and try again.</value></data>
+  <data name="Dialog.Detailed.NotIdentified"><value>Waiting for the adapter to respond. The information below is reported by the adapter.</value></data>
+  <data name="Dialog.Detailed.NothingMore"><value>This firmware reports only its build id, already shown on the previous screen.</value></data>
+
+  <data name="Dialog.Detailed.Firmware"><value>Firmware build</value></data>
+  <data name="Dialog.Detailed.Mcu"><value>Processor</value></data>
+  <data name="Dialog.Detailed.Clock"><value>CAN clock</value></data>
+  <data name="Dialog.Detailed.CanFd"><value>CAN FD</value></data>
+  <data name="Dialog.Detailed.ListenOnly"><value>Listen only</value></data>
+  <data name="Dialog.Detailed.Loopback"><value>Loopback</value></data>
+  <data name="Dialog.Detailed.HardwareTimestamp"><value>Hardware timestamps</value></data>
+  <data name="Dialog.Detailed.HardwareTimestamp.Unused"><value>{0} (not used by this version)</value>                                                                                                                                                </data>
+  <data name="Dialog.Detailed.ErrorCounters"><value>Error counters</value></data>
+  <data name="Dialog.Detailed.DataLimits"><value>Bit timing limits (data)</value></data>
+  <data name="Dialog.Detailed.NominalLimits"><value>Bit timing limits (nominal)</value>                                                                                                                                                                                                     </data>
+  <data name="Common.Yes"><value>yes</value></data>
+  <data name="Common.No"><value>no</value></data>
+  <data name="Common.None"><value>none</value>                                                                                                                                                </data>
+  <data name="Dialog.Detailed.Serial"><value>Serial number</value></data>
+  <data name="Dialog.Detailed.Limits"><value>Bit timing limits</value></data>
+  <data name="Dialog.Detailed.Limits.Hint"><value>The firmware's own bit timing limits, in the order it reports them. Quote them when reporting a problem.</value></data>
+  <data name="Dialog.Bitrate"><value>Nominal</value></data>
+  <data name="Dialog.Rescan"><value>Rescan</value></data>
+  <data name="Dialog.Rescan.Busy"><value>Identifying…</value>                                                                                                                    </data>
+  <data name="Common.Ok"><value>OK</value></data>
+  <data name="Common.Cancel"><value>Cancel</value></data>
+  <data name="Common.Close"><value>Close</value></data>
+  <data name="Common.Connect"><value>Connect</value></data>
+
+  <data name="Toolbar.Disconnect"><value>Disconnect</value></data>
+
+  <data name="Toolbar.Connect"><value>Connect</value></data>
+
+  <data name="Session.ReconnectDeviceGone">
+    <value>{0} is not connected to this computer any more.</value>
+
+  </data>
+  <data name="Toolbar.CloseSession"><value>Close session</value></data>
+  <data name="Record.Stop.Title"><value>Stop recording</value></data>
+  <data name="Record.Stop.Body"><value>Closing the port will stop the recording. Its frames are already on disk — stopping will not lose them.</value></data>
+  <data name="Record.Stop.BodyStopping"><value>The frames are already on disk — stopping will not lose them.</value>                                                                                                                                                                                                                              </data>
+  <data name="Record.Stop.Keep"><value>Stop recording</value></data>
+  <data name="Record.Stop.NotWired"><value>The recording database could not be opened, so there is no recording to stop.</value></data>
+  <data name="Record.Stop.WhereToExport"><value>A recording can be exported or deleted at any time from Tools ▸ Manage recordings.</value>                                                                                                                                                                               </data>
+  <data name="Record.Stop.ExportNow"><value>Export it now</value>                                                                                                                                                           </data>
+  <data name="Toolbar.Clear"><value>Clear</value></data>
+  <data name="Toolbar.Pause"><value>Pause</value></data>
+  <data name="Toolbar.Resume"><value>Resume</value></data>
+  <data name="Toolbar.Record"><value>Record</value></data>
+  <data name="Recordings.Title"><value>Manage recordings</value></data>
+  <data name="Recordings.LibrarySize"><value>All recordings: {0} on disk</value>                                                                                                                                                                                             </data>
+  <data name="Recordings.Sample"><value>The recording database could not be opened, so the rows below are samples, not your recordings. The details have been written to the log.</value></data>
+  <data name="Recordings.Empty"><value>No recordings yet. Press Record during a session to make one.</value></data>
+  <data name="Recordings.Export"><value>Export…</value></data>
+  <data name="Recordings.Delete"><value>Delete</value></data>
+  <data name="Recordings.Delete.Go"><value>Delete permanently</value></data>
+  <data name="Recordings.Delete.Confirm"><value>Delete “{0}” recorded at {2}, and its {1:N0} frames? This cannot be undone, and the space is not returned to the file.</value>                                                                                                                                                                                                                                                                                                                                                                                                                   </data>
+  <data name="Recordings.Delete.ConfirmNoCount"><value>Delete “{0}” recorded at {1}? This cannot be undone, and the space is not returned to the file.</value>                                                                                                                                                                                                                                                                         </data>
+  <data name="Recordings.Delete.Failed"><value>Delete failed. The details have been written to the log.</value>                                                                                                                                </data>
+  <data name="Recordings.Compact"><value>Compact</value>                                                                                                                                                      </data>
+  <data name="Recordings.Compact.Note"><value>Deleting a recording frees space inside the file but the file does not shrink. Compact rewrites each month so that space goes back to the disk. While it runs it needs room for a second copy of the file.</value>                                                                                                                                                                                                                                                                                                                                                                             </data>
+  <data name="Recordings.Compact.WhileRecording"><value>A recording is in progress, so compacting is not available.</value>                                                                                                                                                                       </data>
+  <data name="Recordings.Compact.Done"><value>Compacted {1} month(s) and reclaimed {0}.</value>                                                                                                                                                                                                                </data>
+  <data name="Recordings.Compact.DoneSkipped"><value>Compacted {1} month(s) and reclaimed {0}. {2} month(s) were skipped; the details have been written to the log.</value>                                                                                                                                                       </data>
+  <data name="Recordings.Compact.Nothing"><value>There is nothing to compact.</value>                                                                                              </data>
+  <data name="Recordings.Compact.Failed"><value>Compacting failed. The details have been written to the log.</value>                                                                                                               </data>
+  <data name="Recordings.FramesUnreadable"><value>⚠ unreadable</value>                                                                                                      </data>
+  <data name="Recordings.FramesWithFd"><value>{0} ({1} FD)</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </data>
+  <data name="Recordings.Volume.Damaged"><value>⚠ The {0} recording volume cannot be read: the file is damaged (details in the log).</value>                                                                                                                        </data>
+  <data name="Recordings.Volume.Newer"><value>⚠ The {0} recording volume cannot be read: it was written by a newer version of diCAN. Update diCAN.</value>                                   </data>
+  <data name="Recordings.Volume.Unreadable"><value>⚠ The {0} recording volume cannot be read (details in the log).</value>                                                                                                                                                                                </data>
+  <data name="Recordings.Unfinished"><value>unfinished</value></data>
+  <data name="Recordings.Scope.Filtered"><value>filtered</value></data>
+  <data name="Recordings.Scope.Everything"><value>everything</value></data>
+
+  <data name="Recordings.Column.Started"><value>Started</value></data>
+  <data name="Recordings.Column.Duration"><value>Length</value></data>
+  <data name="Recordings.Column.Scope"><value>Scope</value></data>
+
+  <data name="Recordings.Column.Frames"><value>Frames</value></data>
+  <data name="Recordings.Column.Device"><value>Adapter</value></data>
+  <data name="Recordings.From"><value>From</value></data>
+  <data name="Recordings.To"><value>To</value></data>
+  <data name="Recordings.OpenCalendar"><value>Open calendar</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </data>
+  <data name="Recordings.Query"><value>Search</value></data>
+  <data name="Recordings.DateHint"><value>yyyy-MM-dd</value>                                                                                                                                                                                                                                                                                                  </data>
+  <data name="Recordings.Filter.Summary"><value>showing {0} of {1}</value>                                                                                                                                                                                      </data>
+  <data name="Recordings.Empty.Filtered"><value>No recording falls in this date range. Clear the dates to see them all.</value>                                                                                                                                                                                         </data>
+  <data name="Menu.Tools.Recordings"><value>Manage recordings…</value></data>
+  <data name="Menu.Tools.Options"><value>Options…</value></data>
+
+  <data name="Options.Title"><value>Options</value></data>
+  <data name="Options.Tab.Connection"><value>Connection</value></data>
+  <data name="Options.Tab.Display"><value>Display</value></data>
+  <data name="Options.Tab.Recording"><value>Recording</value></data>
+  <data name="Options.RecordFilteredOnly"><value>Record only what the filter passes</value></data>
+  <data name="Options.RecordFilteredOnlyNote"><value>While this is ticked, every change to the filter is written into the recording, so a stretch of missing ids can be explained afterwards. Untick to record the whole bus.</value></data>
+  <data name="Options.RecordRawText"><value>Keep the raw slcan text</value></data>
+  <data name="Options.RecordRawTextNote"><value>A second copy of every frame, exactly as the adapter sent it. Useful if the decoder is ever fixed and you want to read the capture again. It makes the file substantially larger, and much larger on CAN FD.</value>                                                                                                                                                                         </data>
+
+  <data name="Options.AutoReconnect"><value>Reconnect automatically after an unexpected disconnect</value></data>
+  <data name="Options.AutoReconnectNote"><value>Off by default: it puts the adapter back on the bus. Never runs when you press Disconnect; a recording continues.</value></data>
+  <data name="Options.AttemptsLabel"><value>Attempts before giving up:</value></data>
+  <data name="Options.DelayLabel"><value>Milliseconds between attempts:</value></data>
+  <data name="Options.PollLabel"><value>Refresh the device list every (ms):</value></data>
+  <data name="Options.PollNote"><value>Lower finds a newly plugged adapter sooner. One scan costs well under a millisecond.</value></data>
+  <data name="Options.CapacityLabel"><value>Frames kept by the stream:</value></data>
+  <data name="Options.CapacityNote"><value>When the buffer is full, each new frame replaces the oldest one. Increasing the capacity uses proportionally more memory.</value></data>
+  <data name="Options.RestartNote"><value>Refresh interval and stream size need a restart. Everything else is immediate.</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   </data>
+  <data name="Reconnect.GaveUp"><value>Reconnecting failed after {0} attempt(s). Press Connect to try again.</value></data>
+  <data name="Reconnect.Trying"><value>Reconnecting… attempt {0} of {1}</value></data>
+  <data name="Toolbar.StopRecord"><value>Stop recording</value></data>
+  <data name="Toolbar.Display"><value>Display…</value></data>
+
+  <data name="Grid.Id"><value>ID</value></data>
+  <data name="Grid.Dir"><value>Dir</value></data>
+  <data name="Grid.Len"><value>Len</value></data>
+  <data name="Grid.LenNote"><value>Payload length in bytes. For a remote frame this is the number of bytes requested, which is the only length such a frame has.</value>                                                     </data>
+  <data name="Grid.Type"><value>Type</value></data>
+  <data name="Grid.TypeNote"><value>Blank for an ordinary classic data frame, which is most of them. FD is a CAN FD frame, FD BRS is CAN FD with the bit rate switched for the data phase, and RTR is a remote request carrying no payload. Standard and extended ids are told apart in the ID column instead: three hex digits when standard, eight when extended.</value>                                                                                                                         </data>
+  <data name="Grid.Data"><value>Data</value></data>
+  <data name="Grid.Period"><value>Period (mean)</value>                                                                                                                                                                                                                                                               </data>
+  <data name="Grid.Count"><value>Count</value></data>
+  <data name="Grid.Delta"><value>Δ ms</value></data>
+  <data name="Grid.MinDelta"><value>min Δ</value></data>
+  <data name="Grid.MaxDelta"><value>max Δ</value></data>
+  <data name="Grid.Time"><value>Time</value></data>
+
+  <data name="Grid.CopyId"><value>Copy id</value>                                                                                                                                                                                                                                                                                         </data>
+  <data name="Grid.CopyData"><value>Copy frame data</value>                                                                                                                    </data>
+  <data name="Grid.AddToQueue"><value>Add to the transmit list</value>                                                                                                                                                                                                                                                                                              </data>
+
+  <data name="Toolbar.View"><value>View</value></data>
+  <data name="Tab.ById"><value>By ID</value></data>
+  <data name="Tab.Stream"><value>Frame stream</value></data>
+
+  <data name="Stream.Gap"><value>—— {0:N0} frame(s) not shown ——</value></data>
+  <data name="Detail.Empty"><value>Select a row to see its full payload.</value></data>
+
+  <data name="Display.Title"><value>Display settings</value></data>
+  <data name="Display.Group.Both"><value>Both views</value>                                                                                                                                                                                                                                                                                                                                                                                                       </data>
+  <data name="Display.Id.Hex"><value>Hex</value></data>
+  <data name="Display.Id.Decimal"><value>Decimal</value></data>
+  <data name="Display.Data.Packed"><value>1E6953</value>                                                                                                                                                                                                                                                                                                                                                                                   </data>
+  <data name="Display.Data.Spaced"><value>1E 69 53</value></data>
+  <data name="Display.Time.Elapsed"><value>Elapsed</value>                                                                                                                                                                                                   </data>
+  <data name="Display.Time.Gap"><value>Gap</value>                                                                                                                                              </data>
+  <data name="Display.MinMax"><value>min Δ / max Δ</value></data>
+  <data name="Display.DeltaNote"><value>Both are the gap between two frames of one id. They come from host-side timestamps, which carry about ±100 µs of jitter. On a busy bus "min Δ" often reads 0.0 — that is the timestamp resolution, not the bus.</value>                                                                                                                                                                                  </data>
+  <data name="Display.OwnFrames"><value>Own frames</value></data>
+  <data name="Display.OwnFramesNote"><value>Includes periodic transmissions.</value></data>
+  <data name="Display.Highlight"><value>Change highlight</value></data>
+  <data name="Display.DeltaTimeNote"><value>Δ from the line above. Blank on the first line and after a gap, where there is nothing to measure against.</value>                                                                                                                                                                                                                                                                                  </data>
+  <data name="Display.FontSize"><value>Text size</value></data>
+
+  <data name="History.Filter"><value>Recent filters</value></data>
+  <data name="History.RemoveTip"><value>Remove this one from the saved history</value>                                                                                                                                                                                                                                                                                   </data>
+  <data name="History.ClearAll"><value>Clear all history</value>                                                                                                                                                                                   </data>
+  <data name="History.ClearAll.Title"><value>Clear filter history</value></data>
+  <data name="History.ClearAll.Message"><value>This deletes all {0} saved filters, including those not shown in the list. It cannot be undone.</value>                                                                                                                                                                                                                                                                                                                                                           </data>
+  <data name="History.ClearAll.Confirm"><value>Delete all</value></data>
+  <data name="History.ClearAll.Failed"><value>The history could not be deleted; the data is still on disk.</value>                                                                                                                                                                                                                              </data>
+
+  <data name="Record.NotWired">
+    <value>diCAN could not open the recording database on this computer, so frames are NOT being saved. The details have been written to the log.</value>
+  </data>
+  <data name="Export.Title"><value>Export</value></data>
+  <data name="Export.Format"><value>Format</value></data>
+  <data name="Export.Csv"><value>CSV — opens in Excel</value></data>
+  <data name="Export.Csv.Hint"><value>Carries everything: CAN FD, bit rate switching, remote frames, direction, and the raw slcan line when the recording kept one.</value></data>
+  <data name="Export.Trc"><value>TRC — PEAK PCAN-View</value></data>
+  <data name="Export.Trc.Hint"><value>Carries classic CAN, and CAN FD and remote frames as well, checked against PEAK's published format specification (not yet opened in PEAK software).</value></data>
+  <data name="Export.Failed"><value>Export failed. The details have been written to the log.</value></data>
+  <data name="Export.FileType.Csv"><value>CSV files</value>                                                                                                                                                                                                                   </data>
+  <data name="Export.FileType.Trc"><value>TRC files</value>                                                    </data>
+  <data name="Export.What"><value>Recording</value></data>
+  <data name="Export.Save"><value>Export…</value></data>
+  <data name="Export.Done"><value>Exported.</value></data>
+  <data name="Export.Refused"><value>Nothing was written: not one frame in this recording can be written to TRC. Export CSV instead.</value>                                                                                                                                                                                                                                                                                                                                      </data>
+  <data name="Export.FilterNote">
+    <value>Only frames the current filter admits are recorded, so an export contains only those. If the filter is changed while recording, each change is stored with the recording.</value>
+  </data>
+  <data name="Export.NotWired"><value>The recording database could not be opened, so there is nothing to export. The details have been written to the log.</value></data>
+
+  <data name="Bottom.Detail"><value>Detail</value></data>
+
+  <data name="Bottom.Send"><value>Transmit</value></data>
+  <data name="Bottom.Log"><value>Log</value></data>
+  <data name="Bottom.Fold"><value>Fold or unfold the bottom panel</value></data>
+
+  <data name="Detail.Addressing"><value>Addressing</value></data>
+  <data name="Detail.Standard"><value>11-bit</value></data>
+  <data name="Detail.Extended"><value>29-bit</value></data>
+  <data name="Detail.CopyPayload"><value>Copy payload</value>                                                                                                                                                                                                                                                                                                                             </data>
+
+  <data name="Log.Clear"><value>Clear the list</value></data>
+  <data name="Log.CopyRow"><value>Copy this line</value></data>
+  <data name="Log.CopyAll"><value>Copy everything shown</value></data>
+  <data name="Log.Save"><value>Save…</value></data>
+  <data name="Log.Event"><value>Event</value></data>
+  <data name="Log.ProblemsOnly"><value>Warnings and errors only</value></data>
+  <data name="Log.Summary"><value>{0} event(s)</value></data>
+  <data name="Log.SummaryTruncated"><value>{0} event(s), earlier ones dropped</value></data>
+
+  <data name="Log.SummaryFiltered"><value>{0} of {1} event(s) · warnings and errors only</value></data>
+  <data name="Log.Empty"><value>Nothing has happened in this session yet. Opening a session, connecting, recording and exporting all appear here.</value></data>
+  <data name="Log.NoProblems"><value>No warnings or errors in this session.</value></data>
+
+  <data name="Transmit.BadInterval"><value>The interval has to be a positive whole number of milliseconds.</value></data>
+
+  <data name="Tx.Add"><value>Add</value></data>
+  <data name="Tx.Duplicate"><value>Duplicate</value></data>
+  <data name="Tx.Remove"><value>Remove</value></data>
+  <data name="Tx.Import"><value>Import</value></data>
+  <data name="Tx.Export"><value>Export</value></data>
+  <data name="Tx.NotYet">
+    <value>Not wired up yet: the file format has still to be decided.</value>
+
+  </data>
+  <data name="Tx.ResetCounters"><value>Reset all counters</value>                                                                                                                                                                                         </data>
+  <data name="Tx.PauseToEdit"><value>Pause the row to change it — only the name can be edited while it transmits.</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </data>
+  <data name="Tx.ResetRowCounter"><value>Reset this row's counter</value>                                                                                                                                                                                                               </data>
+  <data name="Tx.NoSession"><value>No open session. The transmit queue belongs to a session: connect to an adapter and it appears here.</value></data>
+
+  <data name="Tx.EmptyQueue">
+    <value>The queue is empty. Press Add for a new row — "?" explains what the columns mean.</value>
+
+  </data>
+
+  <data name="Tx.Hint">
+    <value>Press Add for a new row. It arrives switched off, so nothing reaches the bus until you tick Enable — fill in the ID, data and period first. A blank repeat count means "until stopped"; 1 means send it once.
+
+In the ID column, an ID of eight hex digits is a 29 bit (extended) frame, fewer digits is 11 bit, and an ID too big for 11 bits is refused — write it as eight digits to send it as a 29 bit frame.
+
+Send now puts one frame out immediately, whether or not the row is switched on.</value>
+
+  </data>
+
+  <data name="Tx.Enabled"><value>Enable</value></data>
+  <data name="Tx.StateLegend"><value>· never started　▶ sending　‖ paused　✓ finished</value></data>
+
+  <data name="Transport.RejectedWithReason"><value>The adapter rejected '{0}'. {1}</value></data>
+  <data name="Transport.Rejected"><value>The adapter rejected '{0}' without giving a reason.</value></data>
+  <data name="Transport.NotOnBus"><value>The adapter is not on the bus.</value></data>
+  <data name="Transport.NoAnswer"><value>The adapter did not answer '{0}' within {1:0.#} s. Every slcan firmware generation answers its commands or its version query, so this port is probably not an slcan adapter.</value></data>
+  <data name="Transport.NoTimingLimits"><value>This adapter did not report the CAN clock and bit timing limits, so the {0} sample point cannot be computed for it. Leave the sample point unset to use the adapter's own timing table.</value></data>
+  <data name="Transport.NoExactTiming"><value>This adapter's {0} MHz CAN clock cannot produce {1} bit/s exactly in the {2} phase, so no bit timing exists for it.</value></data>
+  <data name="Transport.UnsupportedNominal"><value>This adapter cannot do {0}. It supports {1}. ⛔ Nothing was sent.</value></data>
+  <data name="Transport.UnsupportedData"><value>This adapter cannot do a {0} data phase. It supports {1}. ⚠ The board's transceiver may be a lower ceiling still than this list. ⛔ Nothing was sent.</value></data>
+  <data name="Transport.Phase.Arbitration"><value>arbitration</value></data>
+  <data name="Transport.Phase.Data"><value>data</value></data>
+  <data name="Transport.NotOpen"><value>The transport is not open.</value></data>
+  <data name="Transport.AlreadyOpen"><value>The transport is already open.</value></data>
+  <data name="Transport.GsUsb.NoExactNominal"><value>This device cannot produce {0} bit/s exactly from its {1} Hz CAN clock.</value></data>
+  <data name="Transport.GsUsb.NoExactData"><value>This device cannot produce a {0} bit/s data phase exactly.</value></data>
+  <data name="Transport.GsUsb.NoEchoes"><value>The adapter did not acknowledge any of the {0} frames already given to it within {1:0.#} s. The bus may be unterminated, bus-off, or have no other node to acknowledge frames.</value></data>
+  <data name="Transport.GsUsb.NoLimitsAnswer"><value>The device did not answer the bit timing limits request.</value></data>
+  <data name="Transport.GsUsb.NoOneShot"><value>This device cannot switch off automatic retransmission: it does not offer gs_usb one-shot mode. Leave automatic retransmission on, or use an adapter that does.</value></data>
+  <data name="FilterError.Part.Id"><value>id</value>                                                                                                          </data>
+  <data name="FilterError.Part.Mask"><value>mask</value>                                                      </data>
+  <data name="FilterError.Empty"><value>A filter cannot be empty. Use &lt;id&gt;:&lt;mask&gt;, for example 7E0:7FF.</value></data>
+  <data name="FilterError.NoColon"><value>'{0}' has no ':'. A filter is &lt;id&gt;:&lt;mask&gt;, for example 7E0:7FF.</value></data>
+  <data name="FilterError.TwoColons"><value>'{0}' has more than one ':'. Separate several filters with ';'.</value></data>
+  <data name="FilterError.IdTooLarge"><value>id {0} does not fit in {1} bits (largest is {2}).</value></data>
+  <data name="FilterError.MaskTooLarge"><value>mask {0} does not fit in {1} bits (largest is {2}).</value></data>
+  <data name="FilterError.PartMissing"><value>The {0} is missing. A filter is &lt;id&gt;:&lt;mask&gt;, for example 7E0:7FF.</value>                                                                                           </data>
+  <data name="FilterError.PartTooLong"><value>The {0} '{1}' has {2} hex digits; the most it can have is {3}.</value></data>
+  <data name="FilterError.PartNotHex"><value>The {0} '{1}' is not hexadecimal. Write it bare, without 0x: 7E0, not 0x7E0.</value></data>
+  <data name="SendError.IdNotHex"><value>'{0}' is not a hexadecimal CAN ID. Enter the ID using digits 0–9 and letters A–F.</value>                                                                                                                                          </data>
+  <data name="SendError.IdTooLarge"><value>{0} exceeds {1}, the largest 29-bit ID. Enter an ID within this limit.</value></data>
+  <data name="SendError.IdTooLargeStandard"><value>{0} is larger than {1}, the largest 11 bit id. Write the id as 8 hex digits to make it a 29 bit one.</value>                                                                                                                                                                                                                                                                                                                                                                                    </data>
+  <data name="SendError.FdHasNoRemote"><value>CAN FD has no remote frames. The Type column offers one or the other, not both.</value></data>
+  <data name="SendError.BrsNeedsFd"><value>Bit rate switching only exists in CAN FD. Set the Type column to FD BRS, or choose a type without BRS.</value></data>
+  <data name="SendError.OddHexDigits"><value>Payload needs an even number of hex digits, two per byte.</value></data>
+  <data name="SendError.DataNotHex"><value>'{0}' is not hexadecimal. Use only digits 0–9 and letters A–F for each data byte.</value></data>
+  <data name="SendError.DataTooLongFd"><value>{0} bytes is more than the {1} a CAN FD frame carries. Shorten the data to fit within this limit.</value></data>
+  <data name="SendError.DataTooLongClassic"><value>{0} bytes is more than the {1} a classic CAN frame carries. Set the Type column to FD for longer payloads.</value></data>
+  <data name="SendError.NoSuchFdLength"><value>CAN FD does not support a data length of exactly {0} bytes. Choose one of these lengths: 0 to 8, 12, 16, 20, 24, 32, 48 or 64 bytes.</value></data>
+  <data name="SendError.RemoteHasNoData"><value>A remote frame carries no data. Clear the payload, or clear Remote.</value></data>
+  <data name="SendError.RemoteLengthMissing"><value>A remote frame needs the number of bytes it is requesting, 0 to {0}.</value></data>
+  <data name="SendError.RemoteLengthNotNumber"><value>'{0}' is not a whole number of bytes.</value></data>
+  <data name="SendError.RemoteLengthTooLarge"><value>A remote frame can request 0 to {0} bytes, not {1}.</value></data>
+  <data name="Transport.GsUsb.NoFd"><value>A data phase rate was given but this device has no CAN FD support.</value></data>
+  <data name="Transport.GsUsb.NoDataLimits"><value>This device claims CAN FD but did not supply data phase bit timing limits.</value></data>
+  <data name="Error.ContactSupport"><value>Error {0}. Please contact the DSD TECH team.</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </data>
+  <data name="Transport.Legacy.NoSamplePoint"><value>This adapter takes its bit timing from a firmware table, so the sample point cannot be chosen. Leave it unset to use the adapter's own value.</value></data>
+  <data name="Transport.Legacy.UnsupportedNominal"><value>{0} cannot do {1}. It supports {2}. ⛔ Nothing was sent: this firmware ignores a rate it does not support and keeps the previous one.</value></data>
+  <data name="Transport.Legacy.UnsupportedData"><value>{0} cannot do a {1} data phase. It supports {2}. ⛔ Nothing was sent.</value></data>
+  <data name="Transport.Legacy.NoFd"><value>This adapter is running CANable 1.0, which has no CAN FD support at all. A CAN FD frame cannot be sent, and this firmware would neither send nor refuse it.</value></data>
+  <data name="Transport.Legacy.NoSuchMode"><value>The legacy firmware has no '{0}' mode. It offers Normal and Silent only; internal and external loopback are ElmueSoft 2.5 features.</value></data>
+
+  <data name="Slcan.Err.InvalidCommand"><value>The command is not valid.</value></data>
+  <data name="Slcan.Err.InvalidParameter"><value>One of the parameters is not valid.</value></data>
+  <data name="Slcan.Err.MustBeOpen"><value>The adapter must be open first.</value></data>
+  <data name="Slcan.Err.MustBeClosed"><value>The adapter must be closed first.</value></data>
+  <data name="Slcan.Err.FirmwareInternal"><value>The device firmware reported an internal error.</value></data>
+  <data name="Slcan.Err.Unsupported"><value>This board does not support that feature.</value></data>
+  <data name="Slcan.Err.SendBufferFull"><value>The device's send buffer is full.</value></data>
+  <data name="Slcan.Err.BusOff"><value>The CAN controller is bus-off and cannot transmit.</value></data>
+  <data name="Slcan.Err.SilentMode"><value>Sending is not possible in listen only mode.</value></data>
+  <data name="Slcan.Err.NoBitrate"><value>No bitrate has been set, so the adapter cannot be opened.</value></data>
+  <data name="Slcan.Err.OptionBytes"><value>Programming the option bytes failed.</value></data>
+  <data name="Slcan.Err.ReplugRequired"><value>Unplug and re-plug the USB cable to finish.</value></data>
+  <data name="Slcan.Err.OutOfRange"><value>A parameter is outside the valid range.</value></data>
+  <data name="Slcan.Err.Unrecognised"><value>The device reported an error code this host does not recognise.</value></data>
+  <data name="Tx.Name"><value>Name</value></data>
+  <data name="Tx.NamePlaceholder"><value>unnamed</value></data>
+  <data name="Tx.Kind.Classic"><value>Classic</value>                                                                                                                                                                            </data>
+  <data name="Tx.Kind.Fd"><value>FD</value>                                                                                                                 </data>
+  <data name="Tx.Kind.FdBrs"><value>FD BRS</value>                                                      </data>
+  <data name="Tx.Kind.Remote"><value>Remote</value></data>
+  <data name="Tx.RemoteNoData"><value>—</value>                                                                                                                                                                    </data>
+  <data name="Tx.Length"><value>Len</value></data>
+  <data name="Tx.Period"><value>Period</value></data>
+  <data name="Tx.Repeat"><value>Repeat</value></data>
+  <data name="Tx.Action"><value>Action</value></data>
+  <data name="Tx.SendNow"><value>Send now</value></data>
+  <data name="Tx.QueueSummary">
+    <value>{0} of {1} enabled · {2} frames/sec expected</value>
+
+  </data>
+
+  <data name="Periodic.PauseAll"><value>Pause every task</value></data>
+  <data name="Periodic.ResumeAll"><value>Resume every task</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </data>
+  <data name="Periodic.ListenOnly"><value>This session joined the bus silently, so nothing here can transmit.</value></data>
+
+  <data name="Send.ListenOnlyNote"><value>This session opened in listen only, so sending is disabled. Reconnect and choose a different bus mode to transmit.</value></data>
+
+  <data name="Send.Sent"><value>Sent</value></data>
+  <data name="Send.TasksSummary">
+    <value>{0} task(s) · {1} frame(s) sent</value>
+
+  </data>
+  <data name="Send.SkippedNote">
+    <value>{0} transmission(s) skipped: this machine cannot keep up with the interval you asked for. The rate on the bus is lower than the one shown.</value>
+
+  </data>
+  <data name="Send.TaskFailed">
+    <value>Task {0} could not send: {1}</value>
+
+  </data>
+
+  <data name="Status.NoSession"><value>Ready — no session open</value></data>
+  <data name="Status.Disconnected"><value>{0} — disconnected. The table shows what was captured, and is no longer live.</value></data>
+  <data name="Status.Paused"><value>{0} — paused. The table has stopped refreshing; receiving and counting carry on, so nothing is being lost.</value>                                                                                                                                                                   </data>
+  <data name="Status.Recording"><value>Recording</value>                                                                                                                                                                                                    </data>
+  <data name="Status.Rate"><value>{0:N0} f/s · bus ~{1:0}%</value>                                                                                                                                                                                                                                                                  </data>
+  <data name="Status.PeriodNote"><value>Period is a mean. Host side timestamps carry about 100 microseconds of jitter, so it is not a bus level measurement.</value></data>
+
+  <data name="Filter.Label"><value>Filter</value></data>
+  <data name="Filter.Hint">
+    <value>id:mask, several separated by ';'. 7E0:7FF is one id, 700:700 is a range, empty shows everything. In a filter, up to three hex digits means an 11 bit id and four or more means 29 bit.</value>
+
+  </data>
+  <data name="Filter.AllIds">
+    <value>{0} id(s)</value>
+
+  </data>
+  <data name="Filter.ShownOfTotal">
+    <value>{0} of {1} id(s) shown</value>
+
+  </data>
+  <data name="Filter.Title"><value>Filter</value></data>
+  <data name="FirmwareNotice.Title"><value>A newer firmware is available</value></data>
+  <data name="FirmwareNotice.Intro"><value>This adapter ships with CANable's factory firmware. DSD TECH publishes a more complete firmware for this adapter:</value></data>
+  <data name="FirmwareNotice.Crystal"><value>Clocked from the on-board 24 MHz crystal</value></data>
+  <data name="FirmwareNotice.ErrorCounters"><value>Bus error counters are reported</value></data>
+  <data name="FirmwareNotice.OtherFixes"><value>Other firmware fixes</value></data>
+  <data name="FirmwareNotice.CanFd"><value>CAN FD is supported</value></data>
+  <data name="FirmwareNotice.ModesHonoured"><value>Listen-only and loopback actually take effect</value></data>
+  <data name="FirmwareNotice.StaleFrames"><value>Frames left unsent are not handed to the next session</value></data>
+  <data name="FirmwareNotice.How"><value>The firmware and the steps for changing it are on this board's product page:</value></data>
+  <data name="FirmwareNotice.DontShowAgain"><value>Do not show this again</value></data>
+  <data name="FirmwareNotice.Continue"><value>Continue</value></data>
+  <data name="Filter.Collapse"><value>Hide the filter panel</value></data>
+  <data name="Filter.Expand"><value>Show the filter panel</value></data>
+  <data name="Filter.Clear"><value>Clear filter</value></data>
+
+  <data name="Warn.NotConfirmed"><value>This adapter does not acknowledge commands, so diCAN cannot confirm the bitrate took effect. What you see is what was requested, not what the device reports.</value></data>
+
+  <data name="Device.Model.Slcan"><value>CANable slcan</value></data>
+  <data name="Device.Model.LegacyCanable1"><value>CANable 1.0 firmware</value></data>
+
+  <data name="Device.Model.Candlelight"><value>candlelight</value></data>
+  <data name="Device.Model.Bootloader"><value>STM32 ROM bootloader</value></data>
+  <data name="Device.Model.Unknown"><value>Unrecognised device</value></data>
+
+  <data name="Guidance.Family.Stm32G431"><value>STM32G431 (SH-C31x / C31Bx / C31Cx / C32x):</value></data>
+  <data name="Guidance.Family.Stm32F072"><value>STM32F072 (SH-C30x):</value></data>
+
+  <data name="Guidance.Ready"><value>Ready: diCAN can open this adapter.</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </data>
+  <data name="Guidance.BootloaderUnplugTerminalBlock"><value>Unplug the CAN terminal block, then unplug and reconnect USB while leaving the CAN terminal block disconnected. BOOT0 is also CAN_RX on this chip, so an idle bus can hold it high at power-up and boot the ROM instead of the firmware.</value></data>
+  <data name="Guidance.BootloaderCheckBoot0Jumper"><value>Put the board's own BOOT0 jumper or switch back. This chip has a dedicated BOOT0 pin, so the CAN bus cannot have caused it.</value></data>
+  <data name="Guidance.BootloaderDisableBoot0Permanently"><value>Once the firmware runs again, disable BOOT0 permanently with the slcan command *Boot0:Off.</value></data>
+  <data name="Guidance.BootloaderRescan"><value>Then rescan: the adapter should appear as an slcan or candlelight device.</value></data>
+  <data name="Guidance.ReflashToSlcan25"><value>Reflash it with the CANable 2.5 Slcan build and it will appear as a COM port (USB 16D0:117E).</value></data>
+  <data name="Guidance.F072CannotRunSlcan25"><value>This board cannot run CANable 2.5 at all, at any version. Its only slcan firmware is the original canable-fw.</value>                                                                                                                                                                                                                                                                                                                                                                                                                                                         </data>
+  <data name="Guidance.Legacy1ConfirmsNothing"><value>This is the original CANable 1.0 firmware. It acknowledges no command, so diCAN cannot confirm that any setting it sends took effect.</value></data>
+  <data name="Guidance.Legacy1NoCanFd"><value>It has no CAN FD support at all.</value></data>
+  <data name="Guidance.NoPortCheckDriverBinding"><value>Recognised, but Windows has not assigned it a COM port. Check Device Manager for a warning icon on this device: that is a driver problem, not a device fault.</value></data>
+  <data name="Guidance.NoSerialNodePublished">
+    <value>Recognised, but the system has not published a serial device for it, so there is nothing to open. Re-plug it, and try another port or cable.</value>
+
+  </data>
+  <data name="Guidance.NothingFoundUsualCauses"><value>diCAN does not recognise this USB device as a CAN adapter. The usual causes are a charge-only cable with no data lines, a hub that is not enumerating, or the device enumerating as something unexpected.</value></data>
+</root>

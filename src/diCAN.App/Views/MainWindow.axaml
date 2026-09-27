@@ -1,0 +1,1063 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:DiCAN.App.ViewModels"
+        xmlns:loc="using:DiCAN.App.Localization"
+        xmlns:conv="using:DiCAN.App.Converters"
+        xmlns:icons="using:DiCAN.App.Views"
+        mc:Ignorable="d" d:DesignWidth="1040" d:DesignHeight="700"
+        x:Class="DiCAN.App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/dican.ico"
+        Title="{Binding WindowTitle}" Width="1200" Height="660" MinWidth="780" MinHeight="520">
+
+  <DockPanel>
+
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="{loc:Translate Menu.File}">
+        <MenuItem Header="{loc:Translate Menu.File.Exit}" Click="OnExitClick" />
+      </MenuItem>
+
+      <MenuItem Header="{loc:Translate Menu.Session}">
+
+        <MenuItem Header="{loc:Translate Menu.Session.New}" Command="{Binding ShowSessionChooserCommand}" />
+        <MenuItem Header="{loc:Translate Menu.Session.Disconnect}"
+                  Command="{Binding DisconnectCommand}" IsEnabled="{Binding IsConnected}" />
+
+        <MenuItem Header="{loc:Translate Toolbar.CloseSession}"
+                  Command="{Binding CloseSessionCommand}" IsEnabled="{Binding HasSession}" />
+      </MenuItem>
+
+      <MenuItem Header="{loc:Translate Menu.Tools}">
+        <MenuItem Header="{loc:Translate Menu.Tools.Recordings}"
+                  Command="{Binding ShowRecordingsCommand}" />
+
+        <Separator />
+
+        <MenuItem Header="{loc:Translate Menu.Tools.Options}"
+                  Command="{Binding ShowOptionsCommand}" />
+      </MenuItem>
+
+      <MenuItem Header="{Binding LanguageMenuHeader}" ItemsSource="{Binding Languages}">
+        <MenuItem.ItemContainerTheme>
+          <ControlTheme TargetType="MenuItem" x:DataType="vm:LanguageMenuItemViewModel"
+                        BasedOn="{StaticResource {x:Type MenuItem}}">
+            <Setter Property="Header" Value="{Binding Header}" />
+            <Setter Property="ToggleType" Value="Radio" />
+            <Setter Property="IsChecked" Value="{Binding IsCurrent, Mode=OneWay}" />
+            <Setter Property="Command"
+                    Value="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).SetLanguageCommand}" />
+            <Setter Property="CommandParameter" Value="{Binding}" />
+          </ControlTheme>
+        </MenuItem.ItemContainerTheme>
+      </MenuItem>
+
+      <MenuItem Header="{loc:Translate Menu.Help}">
+        <MenuItem Header="{loc:Translate Menu.Help.About}"
+                  Command="{Binding ShowAboutCommand}" />
+      </MenuItem>
+    </Menu>
+
+    <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource DiCanSeparatorBrush}" Padding="10,5">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+
+        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" Margin="0,0,12,0"
+                    IsVisible="{Binding ShowRecordingIndicator}">
+          <Ellipse Classes="recordingDot" />
+          <TextBlock Classes="mono" FontSize="11" VerticalAlignment="Center"
+                     Text="{loc:Translate Status.Recording}" />
+        </StackPanel>
+
+        <TextBlock Grid.Column="1" Classes="mono" FontSize="11" TextTrimming="CharacterEllipsis"
+                   Text="{Binding StatusText}" />
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10">
+
+          <TextBlock Classes="mono dim" FontSize="11"
+                     IsVisible="{Binding Periodic.HasTasks}"
+                     Text="{Binding Periodic.Summary}" />
+          <TextBlock Classes="mono dim" FontSize="11" IsVisible="{Binding IsConnected}"
+                     Text="{Binding SummaryText}" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Grid>
+
+    <Grid IsVisible="{Binding IsEmpty}">
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20" MaxWidth="760">
+
+        <TextBlock Text="{loc:Translate Empty.SelectSessionType}" FontSize="22"
+                   HorizontalAlignment="Center" />
+
+        <ItemsControl ItemsSource="{Binding SessionTypes}" Width="620" HorizontalAlignment="Center">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:SessionTypeViewModel">
+              <Button Classes="sessionCard" Margin="0,0,0,10"
+                      Command="{Binding $parent[ItemsControl].((vm:MainWindowViewModel)DataContext).StartSessionCommand}"
+                      CommandParameter="{Binding}">
+                <Grid ColumnDefinitions="Auto,*">
+
+                  <Viewbox Grid.Column="0" Width="28" Height="28" Margin="0,2,16,0"
+                           VerticalAlignment="Top">
+                    <Path Data="{Binding IconData}" Stretch="None"
+                          Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1.5"
+                          StrokeLineCap="Round" StrokeJoin="Round" />
+                  </Viewbox>
+
+                  <StackPanel Grid.Column="1" Spacing="4">
+                    <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Opacity="0.8" />
+                  </StackPanel>
+                </Grid>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Grid>
+
+    <DockPanel IsVisible="{Binding HasSession}" Margin="10">
+
+      <Grid DockPanel.Dock="Top" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,8">
+
+      <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6">
+
+        <Button MinWidth="92" Command="{Binding ToggleConnectionCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="7">
+            <Panel VerticalAlignment="Center">
+              <Path Classes="toolbarIcon iconStop" IsVisible="{Binding IsConnected}"
+                    Data="{x:Static icons:ToolbarIcons.Disconnect}" />
+              <Path Classes="toolbarIcon iconGo" IsVisible="{Binding !IsConnected}"
+                    Data="{x:Static icons:ToolbarIcons.Connect}" />
+            </Panel>
+            <TextBlock Text="{Binding ConnectionLabel}" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+
+        <Border Width="1" Background="{DynamicResource DiCanSeparatorBrush}" Margin="4,2" />
+
+        <Button Command="{Binding ClearCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="7">
+            <Path Classes="toolbarIcon iconClear" Data="{x:Static icons:ToolbarIcons.Clear}" />
+            <TextBlock Text="{loc:Translate Toolbar.Clear}" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+
+        <Button Command="{Binding TogglePauseCommand}" IsEnabled="{Binding IsConnected}">
+          <StackPanel Orientation="Horizontal" Spacing="7">
+            <Panel VerticalAlignment="Center">
+              <Path Classes="toolbarIcon iconPause" IsVisible="{Binding !IsPaused}"
+                    Data="{x:Static icons:ToolbarIcons.Pause}" />
+              <Path Classes="toolbarIcon iconPause" IsVisible="{Binding IsPaused}"
+                    Data="{x:Static icons:ToolbarIcons.Resume}" />
+            </Panel>
+            <Panel VerticalAlignment="Center">
+              <TextBlock Text="{loc:Translate Toolbar.Pause}" IsVisible="{Binding !IsPaused}" />
+              <TextBlock Text="{loc:Translate Toolbar.Resume}" IsVisible="{Binding IsPaused}" />
+            </Panel>
+          </StackPanel>
+        </Button>
+        <Border Width="1" Background="{DynamicResource DiCanSeparatorBrush}" Margin="4,2" />
+
+        <Button MinWidth="90" Command="{Binding ToggleRecordCommand}" IsEnabled="{Binding IsConnected}">
+          <StackPanel Orientation="Horizontal" Spacing="7">
+            <Panel VerticalAlignment="Center">
+              <Path Classes="toolbarIcon" IsVisible="{Binding !IsRecording}"
+                    Data="{x:Static icons:ToolbarIcons.Record}" />
+              <Path Classes="toolbarIcon iconStop" IsVisible="{Binding IsRecording}"
+                    Data="{x:Static icons:ToolbarIcons.StopRecord}" />
+            </Panel>
+            <TextBlock Text="{Binding RecordLabel}" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+
+        <Border Width="1" Background="{DynamicResource DiCanSeparatorBrush}" Margin="4,2" />
+
+        <Button>
+          <StackPanel Orientation="Horizontal" Spacing="7">
+            <Path Classes="toolbarIcon" Data="{x:Static icons:ToolbarIcons.DisplaySettings}" />
+            <TextBlock Text="{loc:Translate Toolbar.Display}" VerticalAlignment="Center" />
+          </StackPanel>
+          <Button.Flyout>
+            <Flyout Placement="BottomEdgeAlignedLeft">
+              <StackPanel Spacing="8" Width="330" DataContext="{Binding Display}">
+
+                <TextBlock Text="{loc:Translate Display.Title}" FontWeight="SemiBold" />
+
+                <TextBlock Text="{loc:Translate Display.Group.Both}" Classes="dim" FontSize="11" />
+
+                <Grid ColumnDefinitions="76,*" ColumnSpacing="8">
+                  <TextBlock Grid.Column="0" VerticalAlignment="Center" Classes="dim" FontSize="12"
+                             Text="{loc:Translate Grid.Id}" />
+                  <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+                            SelectedIndex="{Binding DecimalIds,
+                                Converter={x:Static conv:BoolToIndexConverter.Instance}}">
+
+                    <ComboBoxItem Content="{loc:Translate Display.Id.Hex}" />
+                    <ComboBoxItem Content="{loc:Translate Display.Id.Decimal}" />
+                  </ComboBox>
+                </Grid>
+
+                <Grid ColumnDefinitions="76,*" ColumnSpacing="8">
+                  <TextBlock Grid.Column="0" VerticalAlignment="Center" Classes="dim" FontSize="12"
+                             Text="{loc:Translate Grid.Data}" />
+                  <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+                            SelectedIndex="{Binding SpacedData,
+                                Converter={x:Static conv:BoolToIndexConverter.Instance}}">
+
+                    <ComboBoxItem Content="{loc:Translate Display.Data.Packed}" />
+                    <ComboBoxItem Content="{loc:Translate Display.Data.Spaced}" />
+                  </ComboBox>
+                </Grid>
+
+                <Border Height="1" Background="{DynamicResource DiCanSeparatorBrush}" />
+
+                <TextBlock Text="{loc:Translate Tab.ById}" Classes="dim" FontSize="11" />
+
+                <CheckBox Content="{loc:Translate Grid.Delta}"
+                          IsChecked="{Binding ShowDeltaColumn}" />
+
+                <Grid ColumnDefinitions="*,Auto">
+                  <CheckBox Grid.Column="0" Content="{loc:Translate Display.MinMax}"
+                            IsChecked="{Binding ShowMinMaxDeltaColumns}" />
+                  <Button Grid.Column="1" Padding="7,1" Content="?" VerticalAlignment="Center">
+                    <Button.Flyout>
+                      <Flyout Placement="BottomEdgeAlignedRight">
+                        <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                                   Text="{loc:Translate Display.DeltaNote}" />
+                      </Flyout>
+                    </Button.Flyout>
+                  </Button>
+                </Grid>
+
+                <CheckBox Content="{loc:Translate Display.Highlight}"
+                          IsChecked="{Binding HighlightChanges}" />
+
+                <Border Height="1" Background="{DynamicResource DiCanSeparatorBrush}" />
+
+                <TextBlock Text="{loc:Translate Tab.Stream}" Classes="dim" FontSize="11" />
+
+                <Grid ColumnDefinitions="*,Auto">
+                  <CheckBox Grid.Column="0" Content="{loc:Translate Display.OwnFrames}"
+                            IsChecked="{Binding ShowOwnFramesInStream}" />
+                  <Button Grid.Column="1" Padding="7,1" Content="?" VerticalAlignment="Center">
+                    <Button.Flyout>
+                      <Flyout Placement="BottomEdgeAlignedRight">
+                        <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                                   Text="{loc:Translate Display.OwnFramesNote}" />
+                      </Flyout>
+                    </Button.Flyout>
+                  </Button>
+                </Grid>
+
+                <Grid ColumnDefinitions="76,*,Auto" ColumnSpacing="8">
+                  <TextBlock Grid.Column="0" VerticalAlignment="Center" Classes="dim" FontSize="12"
+                             Text="{loc:Translate Grid.Time}" />
+                  <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+                            SelectedIndex="{Binding StreamDeltaTime,
+                                Converter={x:Static conv:BoolToIndexConverter.Instance}}">
+                    <ComboBoxItem Content="{loc:Translate Display.Time.Elapsed}" />
+                    <ComboBoxItem Content="{loc:Translate Display.Time.Gap}" />
+                  </ComboBox>
+                  <Button Grid.Column="2" Padding="7,1" Content="?" VerticalAlignment="Center">
+                    <Button.Flyout>
+                      <Flyout Placement="BottomEdgeAlignedRight">
+                        <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                                   Text="{loc:Translate Display.DeltaTimeNote}" />
+                      </Flyout>
+                    </Button.Flyout>
+                  </Button>
+                </Grid>
+
+                <Border Height="1" Background="{DynamicResource DiCanSeparatorBrush}" />
+
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                  <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                             Text="{loc:Translate Display.FontSize}" />
+                  <Slider Grid.Column="1" Minimum="11" Maximum="18" TickFrequency="1"
+                          IsSnapToTickEnabled="True" Value="{Binding FontSize}" />
+                  <TextBlock Grid.Column="2" VerticalAlignment="Center" Classes="mono"
+                             Text="{Binding FontSize, StringFormat='{}{0:0}'}" />
+                </Grid>
+
+              </StackPanel>
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+      </StackPanel>
+
+      <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+        <TextBlock Text="{loc:Translate Toolbar.View}" VerticalAlignment="Center"
+                   Classes="dim" Margin="0,0,2,0" />
+        <Border BorderThickness="1" BorderBrush="{DynamicResource DiCanSeparatorBrush}"
+                CornerRadius="4" ClipToBounds="True">
+          <StackPanel Orientation="Horizontal">
+
+            <ToggleButton Classes="segment" Content="{loc:Translate Tab.ById}"
+                          IsChecked="{Binding IsAggregateTab, Mode=OneWay}"
+                          Command="{Binding SelectViewCommand}" CommandParameter="0" />
+            <Border Width="1" Background="{DynamicResource DiCanSeparatorBrush}" />
+            <ToggleButton Classes="segment" Content="{loc:Translate Tab.Stream}"
+                          IsChecked="{Binding IsStreamTab, Mode=OneWay}"
+                          Command="{Binding SelectViewCommand}" CommandParameter="1" />
+
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      </Grid>
+
+      <Border DockPanel.Dock="Top" IsVisible="{Binding ShowRecordingNotWired}"
+              Background="{DynamicResource DiCanErrorSurfaceBrush}"
+              Padding="10,6" CornerRadius="4" Margin="0,0,0,8">
+        <TextBlock FontSize="12" TextWrapping="Wrap" Text="{loc:Translate Record.NotWired}" />
+      </Border>
+
+      <Border DockPanel.Dock="Top" IsVisible="{Binding IsNamingOffered}"
+              Background="{DynamicResource DiCanCautionSurfaceBrush}"
+              Padding="10,7" CornerRadius="4" Margin="0,0,0,8">
+        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8">
+          <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="12"
+                     Text="{loc:Translate Naming.Prompt}" />
+          <TextBox Grid.Column="1" Text="{Binding NameDraft}" MaxLength="20"
+                   PlaceholderText="{Binding NamePlaceholder}" FontSize="12" MinHeight="0" Padding="6,3" />
+          <Button Grid.Column="2" Content="{loc:Translate Naming.Save}"
+                  Command="{Binding SaveNameCommand}" />
+          <Button Grid.Column="3" Content="{loc:Translate Naming.Dismiss}"
+                  Command="{Binding DismissNamingCommand}" />
+        </Grid>
+      </Border>
+
+      <Border DockPanel.Dock="Top" Background="{DynamicResource DiCanWarningSurfaceBrush}" CornerRadius="4" Padding="10,6"
+              Margin="0,0,0,8" IsVisible="{Binding !ConfigurationConfirmed}">
+        <TextBlock FontSize="12" TextWrapping="Wrap" Text="{Binding NotConfirmedWarning}" />
+      </Border>
+
+      <Grid x:Name="SplitGrid" ColumnDefinitions="Auto,200,6,*">
+
+        <Border Grid.Column="0" IsVisible="{Binding !IsSidebarOpen}"
+                BorderThickness="0,0,1,0" BorderBrush="{DynamicResource DiCanSeparatorBrush}"
+                Padding="2,0,4,0">
+          <Button VerticalAlignment="Top" Padding="6,4" Content="»"
+                  ToolTip.Tip="{loc:Translate Filter.Expand}"
+                  Command="{Binding ToggleSidebarCommand}" />
+        </Border>
+
+        <DockPanel Grid.Column="1" IsVisible="{Binding IsSidebarOpen}" Margin="0,0,0,0">
+
+          <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="4"
+                Margin="0,0,0,6">
+            <TextBlock Grid.Column="0" Text="{loc:Translate Filter.Title}" FontWeight="SemiBold"
+                       VerticalAlignment="Center" />
+
+            <Button Grid.Column="1" Padding="7,2" Content="?">
+              <Button.Flyout>
+                <Flyout Placement="BottomEdgeAlignedLeft">
+                  <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                             Text="{Binding FilterHint}" />
+                </Flyout>
+              </Button.Flyout>
+            </Button>
+
+            <Button Grid.Column="2" Padding="6,2" Content="«"
+                    ToolTip.Tip="{loc:Translate Filter.Collapse}"
+                    Command="{Binding ToggleSidebarCommand}" />
+          </Grid>
+
+          <StackPanel DockPanel.Dock="Top" Spacing="6">
+
+            <TextBox Text="{Binding FilterText}" Classes="mono"
+                     Classes.invalid="{Binding HasFilterError}"
+                     LostFocus="OnFilterBoxLostFocus"
+                     PlaceholderText="7E0:7FF;7E8:7FF">
+              <TextBox.KeyBindings>
+                <KeyBinding Gesture="Enter" Command="{Binding CommitFilterCommand}" />
+              </TextBox.KeyBindings>
+            </TextBox>
+
+            <TextBlock Classes="dim" FontSize="11" Text="{Binding IdCountText}" />
+
+            <Button HorizontalAlignment="Stretch" Content="{loc:Translate Filter.Clear}"
+                    Command="{Binding ClearFilterCommand}" IsVisible="{Binding IsFiltering}" />
+
+            <ComboBox HorizontalAlignment="Stretch"
+                      PlaceholderText="{loc:Translate History.Filter}"
+                      ItemsSource="{Binding FilterHistoryRows}"
+                      SelectionChanged="OnFilterHistoryPicked">
+              <ComboBox.ItemTemplate>
+                <DataTemplate DataType="vm:HistoryItemViewModel">
+                  <Grid ColumnDefinitions="*,Auto" MinWidth="150">
+                    <TextBlock Grid.Column="0" Classes="mono" VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis"
+                               IsVisible="{Binding IsEntry}" Text="{Binding Text}" />
+
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" FontWeight="SemiBold"
+                               IsVisible="{Binding IsClearAction}"
+                               Text="{loc:Translate History.ClearAll}" />
+
+                    <Button Grid.Column="1" Margin="8,0,0,0" Padding="6,0" Content="×"
+                            IsVisible="{Binding IsEntry}"
+                            ToolTip.Tip="{loc:Translate History.RemoveTip}"
+                            Command="{Binding DeleteCommand}" />
+                  </Grid>
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Classes="mono" FontSize="11" TextWrapping="Wrap"
+                       Foreground="{DynamicResource DiCanErrorForegroundBrush}"
+                       IsVisible="{Binding HasFilterError}" Text="{Binding FilterError}" />
+
+          </StackPanel>
+
+          <Panel />
+        </DockPanel>
+
+        <Border Grid.Column="2" IsVisible="{Binding IsSidebarOpen}"
+                HorizontalAlignment="Center" Width="1"
+                Background="{DynamicResource DiCanSeparatorBrush}" />
+
+        <GridSplitter Grid.Column="2" IsVisible="{Binding IsSidebarOpen}"
+                      Background="Transparent" ResizeDirection="Columns" />
+
+        <Grid Grid.Column="3" Margin="8,0,0,0" x:Name="BottomSplit"
+              RowDefinitions="*,Auto,190">
+
+      <GridSplitter Grid.Row="1" Height="6" Background="Transparent"
+                    ResizeDirection="Rows" VerticalAlignment="Center"
+                    IsVisible="{Binding IsBottomPanelOpen}" />
+
+      <Border Grid.Row="2" Margin="0,0,0,0" Padding="0,6,0,0"
+              BorderThickness="0,1,0,0" BorderBrush="{DynamicResource DiCanSeparatorBrush}">
+        <DockPanel>
+
+          <Grid DockPanel.Dock="Bottom">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+
+              <ToggleButton Classes="page" Content="{loc:Translate Bottom.Detail}"
+                            IsChecked="{Binding IsDetailTab, Mode=OneWay}"
+                            Command="{Binding SelectBottomTabCommand}" CommandParameter="0" />
+
+              <ToggleButton Classes="page" IsVisible="{Binding ShowSendTab}"
+                            IsChecked="{Binding IsSendTab, Mode=OneWay}"
+                            Command="{Binding SelectBottomTabCommand}" CommandParameter="1">
+                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                  <TextBlock Text="{loc:Translate Bottom.Send}" VerticalAlignment="Center" />
+
+                  <Ellipse Width="7" Height="7" VerticalAlignment="Center"
+                           IsVisible="{Binding Periodic.HasError}"
+                           Fill="{DynamicResource DiCanErrorForegroundBrush}" />
+
+                  <Ellipse Width="7" Height="7" VerticalAlignment="Center"
+                           IsVisible="{Binding IsTransmittingPeriodically}"
+                           Fill="{DynamicResource DiCanTxForegroundBrush}" />
+                </StackPanel>
+              </ToggleButton>
+
+              <ToggleButton Classes="page" IsVisible="{Binding ShowLogTab}"
+                            IsChecked="{Binding IsLogTab, Mode=OneWay}"
+                            Command="{Binding SelectBottomTabCommand}" CommandParameter="2">
+                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                  <TextBlock Text="{loc:Translate Bottom.Log}" VerticalAlignment="Center" />
+
+                  <Ellipse Width="7" Height="7" VerticalAlignment="Center"
+                           IsVisible="{Binding HasUnreadProblems}"
+                           Fill="{DynamicResource DiCanErrorForegroundBrush}" />
+                </StackPanel>
+              </ToggleButton>
+            </StackPanel>
+
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Padding="6,2"
+                    Content="▾" IsVisible="{Binding IsBottomPanelOpen}"
+                    ToolTip.Tip="{loc:Translate Bottom.Fold}"
+                    Command="{Binding ToggleBottomPanelCommand}" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Padding="6,2"
+                    Content="▴" IsVisible="{Binding !IsBottomPanelOpen}"
+                    ToolTip.Tip="{loc:Translate Bottom.Fold}"
+                    Command="{Binding ToggleBottomPanelCommand}" />
+          </Grid>
+
+          <Border Background="{DynamicResource DiCanPanelBrush}" CornerRadius="4" Padding="10,6"
+                  IsVisible="{Binding IsBottomPanelOpen}">
+            <Panel>
+
+              <ScrollViewer IsVisible="{Binding ShowDetailPage}"
+                            VerticalScrollBarVisibility="Auto"
+                            HorizontalScrollBarVisibility="Disabled">
+              <Panel>
+
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*"
+                      IsVisible="{Binding HasDetail}">
+
+                  <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                              Orientation="Horizontal" Spacing="6" Margin="0,0,0,3">
+                    <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center"
+                               Text="{Binding DetailIdLabel}" />
+                    <SelectableTextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                                         Text="{Binding DetailId}" />
+
+                    <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0"
+                               Text="{Binding DetailAddressingLabel}" />
+                    <TextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                               Text="{Binding DetailAddressing}" />
+
+                    <Border Width="1" Height="13" Margin="14,0,4,0" VerticalAlignment="Center"
+                            Background="{DynamicResource DiCanSeparatorBrush}" />
+
+                    <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center"
+                               Text="{Binding DetailDirLabel}" />
+                    <TextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                               Text="{Binding DetailDirection}" />
+
+                    <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0"
+                               Text="{Binding DetailLenLabel}" />
+                    <TextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                               Text="{Binding DetailLength}" />
+
+                    <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0"
+                               IsVisible="{Binding HasDetailType}"
+                               Text="{Binding DetailTypeLabel}" />
+                    <TextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                               IsVisible="{Binding HasDetailType}"
+                               Text="{Binding DetailType}" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="6"
+                                IsVisible="{Binding DetailShowsPeriod}">
+
+                      <Border Width="1" Height="13" Margin="14,0,4,0" VerticalAlignment="Center"
+                              Background="{DynamicResource DiCanSeparatorBrush}" />
+                      <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center"
+                                 Text="{Binding DetailPeriodLabel}" />
+                      <TextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                                 Text="{Binding DetailPeriod}" />
+                      <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center" Margin="12,0,0,0"
+                                 Text="{Binding DetailCountLabel}" />
+                      <TextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                                 Text="{Binding DetailCount}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="6"
+                                IsVisible="{Binding DetailShowsTime}">
+
+                      <Border Width="1" Height="13" Margin="14,0,4,0" VerticalAlignment="Center"
+                              Background="{DynamicResource DiCanSeparatorBrush}" />
+                      <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center"
+                                 Text="{Binding DetailTimeLabel}" />
+                      <TextBlock Classes="mono" FontSize="12" VerticalAlignment="Center"
+                                 Text="{Binding DetailTime}" />
+                    </StackPanel>
+                  </StackPanel>
+
+                  <TextBlock Grid.Row="1" Grid.Column="0" Classes="dim" FontSize="11"
+                             VerticalAlignment="Top" Margin="0,1,8,0"
+                             Text="{Binding DetailDataLabel}" />
+
+                  <SelectableTextBlock Grid.Row="1" Grid.Column="1" x:Name="DetailPayload"
+                                       Classes="mono" FontSize="12" VerticalAlignment="Top"
+                                       TextWrapping="Wrap"
+                                       Text="{Binding DetailDataSpaced}">
+
+                    <SelectableTextBlock.ContextMenu>
+                      <ContextMenu>
+                        <MenuItem Header="{loc:Translate Detail.CopyPayload}"
+                                  IsEnabled="{Binding HasDetail}"
+                                  Click="OnCopyDetailPayloadClick" />
+                      </ContextMenu>
+                    </SelectableTextBlock.ContextMenu>
+                  </SelectableTextBlock>
+                </Grid>
+
+                <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center"
+                           IsVisible="{Binding !HasDetail}"
+                           Text="{loc:Translate Detail.Empty}" />
+              </Panel>
+              </ScrollViewer>
+
+              <DockPanel IsVisible="{Binding ShowSendPage}" Background="Transparent">
+                <DockPanel.ContextMenu>
+                  <ContextMenu>
+
+                    <MenuItem Header="{loc:Translate Tx.Duplicate}"
+                              Command="{Binding DuplicateTransmitRowCommand}" />
+                    <MenuItem Header="{loc:Translate Tx.Remove}"
+                              Command="{Binding RemoveTransmitRowCommand}" />
+                    <Separator />
+                    <MenuItem Header="{loc:Translate Periodic.PauseAll}"
+                              IsEnabled="{Binding Periodic.HasRunningTasks}"
+                              Command="{Binding Periodic.PauseAllCommand}" />
+                    <MenuItem Header="{loc:Translate Periodic.ResumeAll}"
+                              IsEnabled="{Binding Periodic.HasPausedTasks}"
+                              Command="{Binding Periodic.ResumeAllCommand}" />
+                    <Separator />
+
+                    <MenuItem Header="{loc:Translate Tx.ResetRowCounter}"
+                              IsEnabled="{Binding HasSelectedTransmitRow}"
+                              Command="{Binding Periodic.ResetRowCounterCommand}"
+                              CommandParameter="{Binding SelectedTransmitRow}" />
+                    <MenuItem Header="{loc:Translate Tx.ResetCounters}"
+                              Command="{Binding Periodic.ResetCountersCommand}" />
+                  </ContextMenu>
+                </DockPanel.ContextMenu>
+
+                <TextBlock DockPanel.Dock="Top" Classes="dim" FontSize="11" TextWrapping="Wrap"
+                           IsVisible="{Binding !Periodic.CanTransmit}"
+                           Text="{loc:Translate Periodic.ListenOnly}" />
+
+                <Border DockPanel.Dock="Top" Background="{DynamicResource DiCanPanelBrush}"
+                        CornerRadius="4" Padding="8,5" Margin="0,0,0,6">
+                  <Grid ColumnDefinitions="Auto,*,Auto">
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6">
+                      <Button Content="{loc:Translate Tx.Add}"
+                              IsEnabled="{Binding Periodic.CanTransmit}"
+                              Command="{Binding Periodic.AddDefaultRowCommand}" />
+                      <Button Content="{loc:Translate Tx.Duplicate}"
+                              Command="{Binding DuplicateTransmitRowCommand}" />
+                      <Button Content="{loc:Translate Tx.Remove}"
+                              Command="{Binding RemoveTransmitRowCommand}" />
+
+                      <Border Width="1" Margin="4,2" IsVisible="False"
+                              Background="{DynamicResource DiCanSeparatorBrush}" />
+
+                      <Button Content="{loc:Translate Tx.Import}" IsEnabled="False" IsVisible="False"
+                              ToolTip.Tip="{loc:Translate Tx.NotYet}" />
+                      <Button Content="{loc:Translate Tx.Export}" IsEnabled="False" IsVisible="False"
+                              ToolTip.Tip="{loc:Translate Tx.NotYet}" />
+                      <Border Width="1" Margin="4,2"
+                              Background="{DynamicResource DiCanSeparatorBrush}" />
+
+                      <Button Content="{loc:Translate Periodic.PauseAll}"
+                              IsEnabled="{Binding Periodic.HasRunningTasks}"
+                              Command="{Binding Periodic.PauseAllCommand}" />
+                      <Button Content="{loc:Translate Periodic.ResumeAll}"
+                              IsEnabled="{Binding Periodic.HasPausedTasks}"
+                              Command="{Binding Periodic.ResumeAllCommand}" />
+
+                      <Button Padding="7,2" Content="?">
+                        <Button.Flyout>
+                          <Flyout Placement="TopEdgeAlignedLeft">
+                            <TextBlock Width="320" TextWrapping="Wrap" FontSize="12"
+                                       Text="{loc:Translate Tx.Hint}" />
+                          </Flyout>
+                        </Button.Flyout>
+                      </Button>
+                    </StackPanel>
+
+                    <TextBlock Grid.Column="2" Classes="dim" FontSize="11" VerticalAlignment="Center"
+                               Text="{Binding Periodic.QueueSummary}" />
+                  </Grid>
+                </Border>
+
+                <TextBlock DockPanel.Dock="Bottom" Classes="problem" FontSize="11"
+                           TextWrapping="Wrap" Margin="2,6,2,0"
+                           IsVisible="{Binding Periodic.HasSkipped}"
+                           Text="{Binding Periodic.SkippedNote}" />
+
+                <Border DockPanel.Dock="Top" Margin="0,0,0,6"
+                        Background="{DynamicResource DiCanErrorSurfaceBrush}" CornerRadius="3"
+                        Padding="8,5" IsVisible="{Binding Periodic.HasError}">
+                  <TextBlock Text="{Binding Periodic.Error}" TextWrapping="Wrap" FontSize="12" />
+                </Border>
+
+                <TextBlock DockPanel.Dock="Top" Classes="dim" FontSize="11" TextWrapping="Wrap"
+                           Margin="4,4,4,0"
+                           IsVisible="{Binding !HasTransmitQueue}"
+                           Text="{loc:Translate Tx.NoSession}" />
+
+                <TextBlock DockPanel.Dock="Top" Classes="dim" FontSize="11" TextWrapping="Wrap"
+                           Margin="4,4,4,0"
+                           IsVisible="{Binding Periodic.IsEmptyQueue, FallbackValue=False}"
+                           Text="{loc:Translate Tx.EmptyQueue}" />
+
+                <DataGrid x:Name="TransmitGrid"
+                          ContextRequested="OnTransmitContextRequested"
+                          IsVisible="{Binding HasTransmitQueue}"
+                          ItemsSource="{Binding Periodic.Tasks}"
+                          SelectedItem="{Binding SelectedTransmitRow}"
+                          FontSize="{Binding Display.FontSize}"
+                          RowHeight="{Binding Display.RowHeight}"
+                          IsReadOnly="False"
+                          CanUserReorderColumns="True"
+                          CanUserResizeColumns="True"
+                          CanUserSortColumns="False"
+                          GridLinesVisibility="Horizontal"
+                          HeadersVisibility="Column">
+                  <DataGrid.Columns>
+
+                    <DataGridTemplateColumn Width="Auto" IsReadOnly="True">
+                      <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{loc:Translate Tx.Enabled}"
+                                   ToolTip.Tip="{loc:Translate Tx.StateLegend}" />
+                      </DataGridTemplateColumn.Header>
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+                          <StackPanel Orientation="Horizontal" Spacing="5"
+                                      ToolTip.Tip="{loc:Translate Tx.StateLegend}">
+                            <CheckBox MinWidth="0" IsChecked="{Binding IsEnabled}" />
+
+                            <TextBlock Text="{Binding StateSymbol}" Width="12"
+                                       VerticalAlignment="Center" TextAlignment="Center"
+                                       FontFamily="Consolas,Menlo,monospace" />
+                          </StackPanel>
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{loc:Translate Tx.Name}" Width="88"
+                                            IsReadOnly="True">
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+
+                          <Grid>
+                            <TextBlock Text="{loc:Translate Tx.NamePlaceholder}"
+                                       IsVisible="{Binding !HasName}" IsHitTestVisible="False"
+                                       Foreground="{DynamicResource DiCanPlaceholderBrush}"
+                                       Margin="5,0" VerticalAlignment="Center" />
+                            <TextBox Text="{Binding Name}" BorderThickness="0"
+                                     Background="Transparent" Padding="4,0" MinHeight="0"
+                                     VerticalAlignment="Center" />
+                          </Grid>
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{loc:Translate Grid.Id}" Width="76">
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+                          <TextBox Text="{Binding IdText}"
+                                   BorderThickness="0" Background="Transparent"
+                                   Padding="4,0" MinHeight="0"
+                                   FontFamily="Consolas,Menlo,monospace"
+                                   VerticalAlignment="Center" />
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="Auto">
+                      <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{loc:Translate Grid.Type}"
+                                   ToolTip.Tip="{loc:Translate Grid.TypeNote}" />
+                      </DataGridTemplateColumn.Header>
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+
+                          <ComboBox ItemsSource="{Binding KindOptions}"
+                                    SelectedIndex="{Binding KindIndex}"
+                                    MinHeight="0" Padding="6,1" FontSize="12"
+                                    VerticalAlignment="Center">
+                            <ComboBox.ItemTemplate>
+                              <DataTemplate x:DataType="loc:LocalizedString">
+                                <TextBlock Text="{Binding Value}" />
+                              </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                          </ComboBox>
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{loc:Translate Tx.Length}" Width="Auto">
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+                          <Grid>
+                            <TextBlock Text="{Binding LengthText}" IsVisible="{Binding ShowLength}"
+                                       FontFamily="Consolas,Menlo,monospace"
+                                       Margin="5,0" VerticalAlignment="Center" />
+                            <TextBox Text="{Binding RemoteLengthText}"
+                                     IsVisible="{Binding IsRemoteKind}"
+                                     BorderThickness="0" Background="Transparent"
+                                     Padding="4,0" MinHeight="0" MinWidth="34"
+                                     FontFamily="Consolas,Menlo,monospace"
+                                     VerticalAlignment="Center" />
+                          </Grid>
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{loc:Translate Grid.Data}" Width="*">
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+                          <Grid>
+                            <TextBox Text="{Binding DataText}" IsVisible="{Binding ShowLength}"
+                                     BorderThickness="0" Background="Transparent"
+                                     Padding="4,0" MinHeight="0"
+                                     FontFamily="Consolas,Menlo,monospace"
+                                     VerticalAlignment="Center" />
+                            <TextBlock Text="{loc:Translate Tx.RemoteNoData}"
+                                       IsVisible="{Binding IsRemoteKind}"
+                                       Foreground="{DynamicResource DiCanPlaceholderBrush}"
+                                       Margin="5,0" VerticalAlignment="Center" />
+                          </Grid>
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{loc:Translate Tx.Period}" Width="96">
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+                          <TextBox Text="{Binding PeriodText}"
+                                   BorderThickness="0" Background="Transparent"
+                                   Padding="4,0" MinHeight="0"
+                                   FontFamily="Consolas,Menlo,monospace"
+                                   VerticalAlignment="Center" />
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{loc:Translate Tx.Repeat}" Width="96">
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+                          <TextBox Text="{Binding RepeatText}"
+                                   BorderThickness="0" Background="Transparent"
+                                   Padding="4,0" MinHeight="0"
+                                   FontFamily="Consolas,Menlo,monospace"
+                                   VerticalAlignment="Center" />
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="{loc:Translate Send.Sent}" Binding="{Binding SentText}"
+                                        Width="128" IsReadOnly="True"
+                                        FontFamily="Consolas,Menlo,monospace" />
+
+                    <DataGridTemplateColumn Header="{loc:Translate Tx.Action}" Width="82"
+                                            IsReadOnly="True">
+                      <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate x:DataType="vm:TransmitRowViewModel">
+                          <Button Padding="8,1" FontSize="11" VerticalAlignment="Center"
+                                  Content="{loc:Translate Tx.SendNow}"
+                                  Command="{Binding $parent[DataGrid].((vm:MainWindowViewModel)DataContext).Periodic.SendRowCommand}"
+                                  CommandParameter="{Binding}" />
+                        </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                  </DataGrid.Columns>
+                </DataGrid>
+              </DockPanel>
+
+              <DockPanel IsVisible="{Binding ShowLogPage}" Background="Transparent">
+
+                <DockPanel.ContextMenu>
+                  <ContextMenu>
+                    <MenuItem Header="{loc:Translate Log.CopyRow}"
+                              IsEnabled="{Binding Log.HasSelectedRow}"
+                              Click="OnCopyLogRowClick" />
+                    <MenuItem Header="{loc:Translate Log.CopyAll}" Click="OnCopyLogClick" />
+                    <Separator />
+
+                    <MenuItem Header="{loc:Translate Log.ProblemsOnly}" ToggleType="CheckBox"
+                              IsChecked="{Binding Log.ProblemsOnly}" />
+                    <Separator />
+
+                    <MenuItem Header="{loc:Translate Log.Clear}" Command="{Binding Log.ClearCommand}" />
+
+                    <MenuItem Header="{loc:Translate Log.Save}" Click="OnSaveLogClick" />
+                  </ContextMenu>
+                </DockPanel.ContextMenu>
+
+                <TextBlock DockPanel.Dock="Bottom" Classes="dim" FontSize="11"
+                           HorizontalAlignment="Right" Margin="0,4,0,0"
+                           Text="{Binding Log.Summary}" />
+
+                <Grid DockPanel.Dock="Top" ColumnDefinitions="Auto,Auto,*" Margin="0,0,0,3">
+                  <TextBlock Grid.Column="0" Classes="dim" FontSize="11" Width="86"
+                             Text="{loc:Translate Grid.Time}" />
+                  <TextBlock Grid.Column="1" Classes="dim" FontSize="11" Width="18" />
+                  <TextBlock Grid.Column="2" Classes="dim" FontSize="11"
+                             Text="{loc:Translate Log.Event}" />
+                </Grid>
+                <Border DockPanel.Dock="Top" Height="1" Margin="0,0,0,4"
+                        Background="{DynamicResource DiCanSeparatorBrush}" />
+
+                <TextBlock Classes="dim" FontSize="11" VerticalAlignment="Center"
+                           IsVisible="{Binding Log.IsEmpty}" Text="{Binding Log.EmptyText}" />
+
+                <ListBox ItemsSource="{Binding Log.Rows}"
+                         SelectedItem="{Binding Log.SelectedRow}"
+                         IsVisible="{Binding !Log.IsEmpty}"
+                         ContextRequested="OnLogContextRequested"
+                         Background="Transparent" BorderThickness="0" Padding="0">
+                  <ListBox.ItemContainerTheme>
+                    <ControlTheme TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                      <Setter Property="Padding" Value="0,1" />
+                      <Setter Property="MinHeight" Value="0" />
+                    </ControlTheme>
+                  </ListBox.ItemContainerTheme>
+                  <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SessionLogRow">
+                      <Grid ColumnDefinitions="Auto,Auto,*">
+                        <TextBlock Grid.Column="0" Classes="mono dim" FontSize="12"
+                                   Width="86" Text="{Binding Time}" />
+
+                        <TextBlock Grid.Column="1" Classes="mono" FontSize="12" Width="18"
+                                   Classes.problem="{Binding IsProblem}" Text="{Binding Glyph}" />
+                        <TextBlock Grid.Column="2" FontSize="12" TextWrapping="Wrap"
+                                   Classes.problem="{Binding IsProblem}"
+                                   Text="{Binding Message}" />
+                      </Grid>
+                    </DataTemplate>
+                  </ListBox.ItemTemplate>
+                </ListBox>
+              </DockPanel>
+
+            </Panel>
+          </Border>
+        </DockPanel>
+      </Border>
+
+      <Panel Grid.Row="0" Margin="0,8,0,0">
+
+        <Panel IsVisible="{Binding IsAggregateTab}">
+
+          <DataGrid x:Name="AggregateGrid"
+                    ItemsSource="{Binding Rows}"
+                    SelectedItem="{Binding SelectedRow}"
+                    FontSize="{Binding Display.FontSize}"
+                    RowHeight="{Binding Display.RowHeight}"
+                    IsReadOnly="True"
+                    CanUserReorderColumns="True"
+                    CanUserResizeColumns="True"
+                    CanUserSortColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    HeadersVisibility="Column"
+                    ContextRequested="OnAggregateContextRequested">
+
+            <DataGrid.ContextMenu>
+              <ContextMenu>
+                <MenuItem Header="{loc:Translate Grid.CopyId}"
+                          IsEnabled="{Binding HasSelectedAggregateRow}"
+                          Click="OnCopyAggregateIdClick" />
+                <MenuItem Header="{loc:Translate Grid.CopyData}"
+                          IsEnabled="{Binding HasSelectedAggregateRow}"
+                          Click="OnCopyAggregateDataClick" />
+                <Separator />
+                <MenuItem Header="{loc:Translate Grid.AddToQueue}"
+                          Command="{Binding SendSelectedRowToQueueCommand}" />
+              </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+
+              <DataGridTextColumn Header="{loc:Translate Grid.Id}" Binding="{Binding Id}" Width="96"
+                                  FontFamily="Consolas,Menlo,monospace" />
+
+              <DataGridTemplateColumn Header="{loc:Translate Grid.Dir}" Width="68">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate x:DataType="vm:CanIdRowViewModel">
+                    <TextBlock VerticalAlignment="Center" Padding="4,0"
+                               Classes.tx="{Binding HasTransmitted}"
+                               Text="{Binding Direction}" />
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+
+              <DataGridTextColumn Binding="{Binding Length}" Width="66">
+                <DataGridTextColumn.Header>
+                  <TextBlock Text="{loc:Translate Grid.Len}"
+                             ToolTip.Tip="{loc:Translate Grid.LenNote}" />
+                </DataGridTextColumn.Header>
+              </DataGridTextColumn>
+
+              <DataGridTextColumn Binding="{Binding Type}" Width="84">
+                <DataGridTextColumn.Header>
+                  <TextBlock Text="{loc:Translate Grid.Type}"
+                             ToolTip.Tip="{loc:Translate Grid.TypeNote}" />
+                </DataGridTextColumn.Header>
+              </DataGridTextColumn>
+
+              <DataGridTemplateColumn Header="{loc:Translate Grid.Data}" Width="*">
+                <DataGridTemplateColumn.CellTemplate>
+                  <DataTemplate x:DataType="vm:CanIdRowViewModel">
+
+                    <TextBlock Classes="mono" VerticalAlignment="Center" Padding="4,0"
+                               Classes.changed="{Binding HasChanged}"
+                               TextTrimming="CharacterEllipsis" Text="{Binding Data}" />
+                  </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+              </DataGridTemplateColumn>
+
+              <DataGridTextColumn Binding="{Binding Period}" Width="130">
+                <DataGridTextColumn.Header>
+                  <TextBlock Text="{loc:Translate Grid.Period}"
+                             ToolTip.Tip="{loc:Translate Status.PeriodNote}" />
+                </DataGridTextColumn.Header>
+              </DataGridTextColumn>
+
+              <DataGridTextColumn Tag="delta" Header="{loc:Translate Grid.Delta}"
+                                  Binding="{Binding Delta}" Width="80" IsVisible="False" />
+              <DataGridTextColumn Tag="minmax" Header="{loc:Translate Grid.MinDelta}"
+                                  Binding="{Binding MinDelta}" Width="80" IsVisible="False" />
+              <DataGridTextColumn Tag="minmax" Header="{loc:Translate Grid.MaxDelta}"
+                                  Binding="{Binding MaxDelta}" Width="80" IsVisible="False" />
+              <DataGridTextColumn Header="{loc:Translate Grid.Count}" Binding="{Binding Count}" Width="82" />
+            </DataGrid.Columns>
+          </DataGrid>
+        </Panel>
+
+        <Panel IsVisible="{Binding IsStreamTab}">
+          <DockPanel>
+
+            <DataGrid x:Name="StreamGrid"
+                      ItemsSource="{Binding StreamRows}"
+                      SelectedItem="{Binding SelectedStreamRow}"
+                      FontSize="{Binding Display.FontSize}"
+                      RowHeight="{Binding Display.RowHeight}"
+                      IsReadOnly="True"
+                      CanUserReorderColumns="True"
+                      CanUserResizeColumns="True"
+                      CanUserSortColumns="False"
+                      GridLinesVisibility="Horizontal"
+                      HeadersVisibility="Column">
+              <DataGrid.Columns>
+
+                <DataGridTextColumn Header="{loc:Translate Grid.Time}" Binding="{Binding Time}"
+                                    Width="Auto" MinWidth="96"
+                                    FontFamily="Consolas,Menlo,monospace" />
+
+                <DataGridTextColumn Header="{loc:Translate Grid.Id}" Binding="{Binding Id}" Width="96"
+                                    FontFamily="Consolas,Menlo,monospace" />
+
+                <DataGridTemplateColumn Header="{loc:Translate Grid.Dir}" Width="68">
+                  <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate x:DataType="vm:FrameStreamRowViewModel">
+                      <TextBlock VerticalAlignment="Center" Padding="4,0"
+                                 Classes.tx="{Binding IsTransmitted}"
+                                 Text="{Binding Direction}" />
+                    </DataTemplate>
+                  </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Length}" Width="66">
+                  <DataGridTextColumn.Header>
+                    <TextBlock Text="{loc:Translate Grid.Len}"
+                               ToolTip.Tip="{loc:Translate Grid.LenNote}" />
+                  </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding Type}" Width="84">
+                  <DataGridTextColumn.Header>
+                    <TextBlock Text="{loc:Translate Grid.Type}"
+                               ToolTip.Tip="{loc:Translate Grid.TypeNote}" />
+                  </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="{loc:Translate Grid.Data}" Width="*">
+                  <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate x:DataType="vm:FrameStreamRowViewModel">
+
+                      <TextBlock Classes="mono" VerticalAlignment="Center" Padding="4,0"
+                                 Classes.dim="{Binding IsGap}"
+                                 TextTrimming="CharacterEllipsis" Text="{Binding Data}" />
+                    </DataTemplate>
+                  </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+              </DataGrid.Columns>
+            </DataGrid>
+          </DockPanel>
+        </Panel>
+
+      </Panel>
+        </Grid>
+      </Grid>
+    </DockPanel>
+
+    </Grid>
+  </DockPanel>
+</Window>

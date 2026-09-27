@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:loc="using:DiCAN.App.Localization"
+        mc:Ignorable="d" d:DesignWidth="520" d:DesignHeight="380"
+        x:Class="DiCAN.App.Views.Dialogs.AboutDialog"
+        Title="{loc:Translate About.Title}"
+        Width="520" MinWidth="440" MaxWidth="640"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
+
+  <StackPanel Margin="24" Spacing="16">
+
+    <TextBlock Text="{loc:Translate About.Title}" FontSize="19" FontWeight="SemiBold" />
+
+    <SelectableTextBlock x:Name="BodyText" TextWrapping="Wrap" LineHeight="22" />
+
+    <Button x:Name="OkButton" MinWidth="96" IsDefault="True" IsCancel="True"
+            HorizontalAlignment="Right"
+            Content="{loc:Translate Common.Ok}" Click="OnOkClick" />
+  </StackPanel>
+</Window>

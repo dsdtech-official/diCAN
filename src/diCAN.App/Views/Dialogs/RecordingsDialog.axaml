@@ -1,0 +1,169 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dialogs="using:DiCAN.App.ViewModels.Dialogs"
+        xmlns:loc="using:DiCAN.App.Localization"
+        mc:Ignorable="d" d:DesignWidth="760" d:DesignHeight="440"
+        x:Class="DiCAN.App.Views.Dialogs.RecordingsDialog"
+        x:DataType="dialogs:RecordingsListViewModel"
+        Title="{loc:Translate Recordings.Title}"
+        Width="900" Height="460" MinWidth="760" MinHeight="320"
+        WindowStartupLocation="CenterOwner">
+
+  <DockPanel Margin="16">
+
+    <Border DockPanel.Dock="Top" IsVisible="{Binding IsSample}"
+            Background="{DynamicResource DiCanErrorSurfaceBrush}" CornerRadius="4"
+            Padding="10,7" Margin="0,0,0,12">
+      <TextBlock FontSize="12" TextWrapping="Wrap" Text="{loc:Translate Recordings.Sample}" />
+    </Border>
+
+    <WrapPanel DockPanel.Dock="Top" ItemSpacing="12" LineSpacing="8" Margin="0,0,0,12">
+      <WrapPanel.Styles>
+        <Style Selector="CalendarDatePicker /template/ Button#PART_Button">
+          <Setter Property="AutomationProperties.Name" Value="{loc:Translate Recordings.OpenCalendar}" />
+        </Style>
+      </WrapPanel.Styles>
+
+      <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+        <TextBlock Text="{loc:Translate Recordings.From}" VerticalAlignment="Center" />
+        <CalendarDatePicker SelectedDate="{Binding From}" MinWidth="150"
+                            AutomationProperties.Name="{loc:Translate Recordings.From}"
+                            SelectedDateFormat="Custom" CustomDateFormatString="yyyy-MM-dd"
+                            PlaceholderText="{loc:Translate Recordings.DateHint}" />
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+        <TextBlock Text="{loc:Translate Recordings.To}" VerticalAlignment="Center" />
+        <CalendarDatePicker SelectedDate="{Binding To}" MinWidth="150"
+                            AutomationProperties.Name="{loc:Translate Recordings.To}"
+                            SelectedDateFormat="Custom" CustomDateFormatString="yyyy-MM-dd"
+                            PlaceholderText="{loc:Translate Recordings.DateHint}" />
+      </StackPanel>
+
+      <Button Content="{loc:Translate Recordings.Query}" Command="{Binding QueryCommand}"
+              VerticalAlignment="Center" />
+
+      <TextBlock IsVisible="{Binding IsFiltered}" Classes="dim" VerticalAlignment="Center"
+                 Text="{Binding FilterSummary}" />
+    </WrapPanel>
+
+    <StackPanel DockPanel.Dock="Bottom" Spacing="0" Margin="0,12,0,0">
+
+      <Border IsVisible="{Binding DeleteArmed}" CornerRadius="4" Padding="12,9" Margin="0,0,0,10"
+              Background="{DynamicResource DiCanErrorSurfaceBrush}">
+        <StackPanel Spacing="9">
+          <TextBlock FontSize="12.5" TextWrapping="Wrap" Text="{Binding DeleteWarning}" />
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+            <Button Content="{loc:Translate Common.Cancel}" Click="OnDeleteCancelClick" />
+            <Button Content="{loc:Translate Recordings.Delete.Go}" Click="OnDeleteConfirmClick" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border IsVisible="{Binding DeleteFailed}" CornerRadius="4" Padding="12,9" Margin="0,0,0,10"
+              Background="{DynamicResource DiCanErrorSurfaceBrush}">
+        <StackPanel Spacing="9">
+          <TextBlock FontSize="12.5" TextWrapping="Wrap" Text="{Binding DeleteFailedMessage}" />
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+            <Button Content="{loc:Translate Common.Close}" Click="OnDeleteFailedCloseClick" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <ItemsControl ItemsSource="{Binding UnreadableVolumeLines}"
+                    IsVisible="{Binding HasUnreadableVolumes}" Margin="0,0,0,4">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="x:String">
+            <TextBlock FontSize="12" TextWrapping="Wrap" Text="{Binding}" />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+      <Border IsVisible="{Binding HasCompactMessage}" CornerRadius="4" Padding="12,9"
+              Margin="0,0,0,10" Background="{DynamicResource DiCanPanelBrush}">
+        <TextBlock FontSize="12.5" TextWrapping="Wrap" Text="{Binding CompactMessage}" />
+      </Border>
+
+      <DockPanel Margin="0,4,0,0" LastChildFill="False">
+
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8">
+
+          <Button Content="{loc:Translate Recordings.Delete}" Click="OnDeleteClick"
+                  IsEnabled="{Binding HasSelection}" />
+          <Border Width="16" />
+          <Button Content="{loc:Translate Recordings.Export}" IsEnabled="{Binding HasSelection}"
+                  Click="OnExportClick" />
+          <Button Content="{loc:Translate Common.Close}" IsCancel="True" MinWidth="90"
+                  Click="OnCloseClick" />
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Spacing="10">
+          <Button Content="{loc:Translate Recordings.Compact}" IsEnabled="{Binding CanCompact}"
+                  Click="OnCompactClick" />
+
+          <Button Padding="7,1" Content="?" VerticalAlignment="Center">
+            <Button.Flyout>
+              <Flyout Placement="TopEdgeAlignedLeft">
+                <TextBlock Width="300" TextWrapping="Wrap" FontSize="12"
+                           Text="{loc:Translate Recordings.Compact.Note}" />
+              </Flyout>
+            </Button.Flyout>
+          </Button>
+
+          <TextBlock Classes="dim" FontSize="12" VerticalAlignment="Center"
+                     Text="{Binding LibrarySize}" />
+
+          <TextBlock Classes="dim" FontSize="12" VerticalAlignment="Center" TextWrapping="Wrap"
+                     MaxWidth="260" IsVisible="{Binding IsRecordingInProgress}"
+                     Text="{Binding CompactBlockedReason}" />
+        </StackPanel>
+
+      </DockPanel>
+    </StackPanel>
+
+    <Grid>
+      <TextBlock IsVisible="{Binding IsFilteredEmpty}" Classes="dim" TextWrapping="Wrap"
+                 VerticalAlignment="Center" HorizontalAlignment="Center"
+                 Text="{loc:Translate Recordings.Empty.Filtered}" />
+
+      <TextBlock IsVisible="{Binding IsTrulyEmpty}" Classes="dim" TextWrapping="Wrap"
+                 VerticalAlignment="Center" HorizontalAlignment="Center"
+                 Text="{loc:Translate Recordings.Empty}" />
+
+      <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding Selected}"
+                IsVisible="{Binding !IsEmpty}"
+                AutoGenerateColumns="False" IsReadOnly="True"
+                CanUserResizeColumns="True" CanUserSortColumns="False"
+                GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+
+      <DataGrid.Columns>
+
+        <DataGridTemplateColumn Header="{loc:Translate Recordings.Column.Device}"
+                                Width="*" MinWidth="240">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate x:DataType="dialogs:RecordingListItemViewModel">
+              <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Device}" VerticalAlignment="Center" />
+
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTextColumn Header="{loc:Translate Recordings.Column.Started}"
+                            Binding="{Binding Started}" Width="Auto" />
+        <DataGridTextColumn Header="{loc:Translate Recordings.Column.Duration}"
+                            Binding="{Binding Duration}" Width="90" />
+
+        <DataGridTextColumn Header="{loc:Translate Recordings.Column.Frames}"
+                            Binding="{Binding Frames}" Width="110" />
+        <DataGridTextColumn Header="{loc:Translate Recordings.Column.Scope}"
+                            Binding="{Binding Scope}" Width="110" />
+
+        </DataGrid.Columns>
+      </DataGrid>
+    </Grid>
+  </DockPanel>
+</Window>

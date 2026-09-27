@@ -1,0 +1,51 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "diCAN.App", "src\diCAN.App\diCAN.App.csproj", "{16EF02B5-5DF2-12E7-AFED-03D1B4B2C39D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "diCAN.Candlelight", "src\diCAN.Candlelight\diCAN.Candlelight.csproj", "{FF642918-53FC-F812-B1BA-F7465088AEAF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "diCAN.Core", "src\diCAN.Core\diCAN.Core.csproj", "{9B25FC48-F796-22D9-5E12-F62F136A3A3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "diCAN.Infrastructure", "src\diCAN.Infrastructure\diCAN.Infrastructure.csproj", "{F4CE602D-81BD-10E9-FC57-DAFDBA157C2E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "diCAN.Mac", "src\diCAN.Mac\diCAN.Mac.csproj", "{0DAA1D97-FF51-EC2B-4A36-2A15D22B4C03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "diCAN.Windows", "src\diCAN.Windows\diCAN.Windows.csproj", "{24BEC382-F742-BFD8-5160-8A8F6314DDD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16EF02B5-5DF2-12E7-AFED-03D1B4B2C39D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16EF02B5-5DF2-12E7-AFED-03D1B4B2C39D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16EF02B5-5DF2-12E7-AFED-03D1B4B2C39D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16EF02B5-5DF2-12E7-AFED-03D1B4B2C39D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF642918-53FC-F812-B1BA-F7465088AEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF642918-53FC-F812-B1BA-F7465088AEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF642918-53FC-F812-B1BA-F7465088AEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF642918-53FC-F812-B1BA-F7465088AEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B25FC48-F796-22D9-5E12-F62F136A3A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B25FC48-F796-22D9-5E12-F62F136A3A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B25FC48-F796-22D9-5E12-F62F136A3A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B25FC48-F796-22D9-5E12-F62F136A3A3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4CE602D-81BD-10E9-FC57-DAFDBA157C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4CE602D-81BD-10E9-FC57-DAFDBA157C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4CE602D-81BD-10E9-FC57-DAFDBA157C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4CE602D-81BD-10E9-FC57-DAFDBA157C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DAA1D97-FF51-EC2B-4A36-2A15D22B4C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DAA1D97-FF51-EC2B-4A36-2A15D22B4C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DAA1D97-FF51-EC2B-4A36-2A15D22B4C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DAA1D97-FF51-EC2B-4A36-2A15D22B4C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24BEC382-F742-BFD8-5160-8A8F6314DDD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24BEC382-F742-BFD8-5160-8A8F6314DDD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24BEC382-F742-BFD8-5160-8A8F6314DDD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24BEC382-F742-BFD8-5160-8A8F6314DDD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

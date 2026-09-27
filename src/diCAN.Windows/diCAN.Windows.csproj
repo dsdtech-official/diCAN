@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>DiCAN.Windows</RootNamespace>
+    <AssemblyName>diCAN.Windows</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\diCAN.Core\diCAN.Core.csproj" />
+
+    <ProjectReference Include="..\diCAN.Candlelight\diCAN.Candlelight.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="diCAN.Windows.Tests" />
+  </ItemGroup>
+
+</Project>

@@ -17,13 +17,20 @@
 
 ## Downloads
 
-| Platform | Availability |
+| Platform | Download |
 |---|---|
-| **Windows** | **[Get diCAN from the Microsoft Store](https://apps.microsoft.com/detail/9N16CGHG2L72)** — available now |
-| **macOS** | The Mac App Store submission is under review. The store link will be added when it becomes available |
+| **Windows — Microsoft Store** | **[Get diCAN from the Microsoft Store](https://apps.microsoft.com/detail/9N16CGHG2L72)** |
+| **Windows — direct download** | [x64](https://github.com/dsdtech-official/diCAN/releases/download/v1.0.0/diCAN-1.0.0-win-x64.zip) · [x86](https://github.com/dsdtech-official/diCAN/releases/download/v1.0.0/diCAN-1.0.0-win-x86.zip) · [ARM64](https://github.com/dsdtech-official/diCAN/releases/download/v1.0.0/diCAN-1.0.0-win-arm64.zip) — Windows 10 version 1809 or later |
+| **macOS — direct download** | [Apple silicon (M-series)](https://github.com/dsdtech-official/diCAN/releases/download/v1.0.0/diCAN-1.0.0-osx-arm64.zip) — macOS 12 or later; Developer ID signed and notarized. An Intel download is not included |
+| **macOS — Mac App Store** | The submission is under review. The store link will be added when available |
 
-Direct download packages have not been published on GitHub yet. They will be listed on the
-[Releases page](https://github.com/dsdtech-official/diCAN/releases) when available.
+The direct downloads are self-contained and include the .NET runtime. On Windows, extract
+the ZIP and run `diCAN.App.exe`; these download builds are not code-signed. On macOS, extract
+the ZIP and move `diCAN.app` to Applications.
+
+See [diCAN v1.0.0](https://github.com/dsdtech-official/diCAN/releases/tag/v1.0.0) for release
+details and [SHA256SUMS.txt](https://github.com/dsdtech-official/diCAN/releases/download/v1.0.0/SHA256SUMS.txt)
+to verify your download.
 
 ## What it does
 

@@ -1,103 +1,125 @@
 # diCAN
 
-Free and open-source CAN analyser software for Windows and macOS, supporting DSD TECH
-SH-C3x, standard CANable and compatible Elmue Multiboard 2.5 USB-CAN adapters.
+> **Free and open-source CAN analyser for Windows and macOS.** Connect a USB-CAN adapter to
+> inspect CAN traffic, send frames, record a session and export the results.
+>
+> Developed by DSD TECH for its SH-C3x adapters, with support for standard CANable and
+> compatible adapters running Elmue Multiboard 2.5 firmware.
 
-One adapter, one bus: receive aggregated by id or as a frame stream, periodic and one-shot
-transmit, recording to a database and export.
+| | |
+|---|---|
+| **Traffic views** | A table grouped by CAN ID and a stream of individual frames |
+| **Protocols** | Classic CAN; CAN FD and bit-rate switching when supported by the adapter firmware |
+| **Interface languages** | English, Simplified Chinese, Traditional Chinese, Japanese, French, German, Spanish, Italian and Portuguese |
+| **Platforms** | Windows 10 version 1809 or later; macOS on Intel and Apple silicon. Linux is not supported |
+| **Stack** | .NET 10 / Avalonia 12.1.0 |
+| **Licence** | Apache-2.0 — see [LICENSE](LICENSE), [NOTICE](NOTICE) and [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES) |
 
----
+## Downloads
+
+| Platform | Availability |
+|---|---|
+| **Windows** | **[Get diCAN from the Microsoft Store](https://apps.microsoft.com/detail/9N16CGHG2L72)** — available now |
+| **macOS** | The Mac App Store submission is under review. The store link will be added when it becomes available |
+
+Direct download packages have not been published on GitHub yet. They will be listed on the
+[Releases page](https://github.com/dsdtech-official/diCAN/releases) when available.
 
 ## What it does
 
-- **Two views of the same traffic** — a table aggregated by CAN id (count, mean period, changed
-  payload bytes highlighted), and a raw frame stream.
-- **Transmit queue** — any number of rows, each with its own id, payload, period and repeat count.
-  Classic, CAN FD, FD with bit-rate switch, and remote frames.
-- **Host-side filtering** — `id:mask` pairs, applied at render time, so nothing already captured is
-  thrown away when you change the filter.
-- **Recording and export** — frames are written to a SQLite database while recording, then exported
-  to **CSV** or **PEAK `.trc`**.
-- **Session log** — every lifecycle event and adapter report, with repeats folded, so a support
-  mail has something behind it.
-- **Nine interface languages** — English, Simplified Chinese, Traditional Chinese, Japanese,
-  French, German, Spanish, Italian and Portuguese, switched from the menu.
+- **See the traffic in two ways.** Group frames by CAN ID to see counts, mean periods and
+  changing payload bytes, or inspect each frame in a stream.
+- **Send frames.** Build a transmit queue with an ID, payload, period and repeat count for
+  each entry. Send once or periodically; Classic CAN, CAN FD, bit-rate switching and remote
+  frames are offered according to the adapter's capabilities.
+- **Filter the display.** Apply CAN ID and mask filters on the host. Changing the display
+  filter does not discard frames already captured.
+- **Record and export.** Save traffic to a local SQLite database, then export recordings as
+  CSV or PEAK `.trc` files.
+- **Keep diagnostic information.** Local logs record connection events and adapter reports
+  to help investigate problems.
+- **Use your preferred language.** Choose from nine interface languages in the Language menu.
 
-## Supported device list
+Recording playback and scripting or automation APIs are not included in this version.
 
-1. **DSD TECH SH-C30x series** — SH-C30A, SH-C30G and SH-C30L.
-2. **DSD TECH SH-C31x series** — SH-C31A and SH-C31G.
-3. **Standard CANable 1.0 and 2.0 adapters.**
-4. **Other adapters running Elmue Multiboard 2.5 firmware.**
-5. **DSD TECH SH-C32x series** — the upgraded version of SH-C31x, including SH-C32A and SH-C32B.
+## Supported adapters
 
-**CAN FD depends on the firmware the adapter is running, not on its model or its MCU.** Some
-SH-C31x units shipped with a factory `canable2` firmware that does not report CAN FD; diCAN does
-not offer it on those. The adapter is asked what it can do, and only what it answers is offered —
-so the dialog shows the truth for the adapter in front of you.
+| Adapter family | Models or firmware |
+|---|---|
+| **DSD TECH SH-C30x** | SH-C30A, SH-C30G and SH-C30L |
+| **DSD TECH SH-C31x** | SH-C31A and SH-C31G |
+| **CANable** | Standard CANable 1.0 and 2.0 adapters |
+| **Elmue Multiboard** | Compatible adapters running Elmue Multiboard 2.5 firmware |
+| **DSD TECH SH-C32x** | SH-C32A and SH-C32B |
 
-**The adapter has to be running a supported firmware.** diCAN speaks slcan (ASCII over a virtual
-COM port) and gs_usb (WinUSB). An adapter that enumerates but is not usable is still listed, with
-what it is and what to do about it — it is never silently absent.
+**Firmware determines the available features.** A model name or MCU alone does not guarantee
+CAN FD support. diCAN reads the adapter's capabilities and offers the modes it reports. Some
+SH-C31x units shipped with factory `canable2` firmware that does not report CAN FD; diCAN does
+not offer CAN FD on those units.
 
-## If an adapter is not recognised
+The adapter must run a supported firmware. diCAN communicates using slcan over a virtual COM
+port or gs_usb over USB. On Windows, gs_usb adapters use WinUSB.
 
-Check the USB connection and the adapter's firmware. On Windows, check whether Device Manager
-shows the device with a warning. If it is still unavailable, email dsd_tech@outlook.com with the
-adapter model, firmware version, operating system and the message shown by diCAN.
+An adapter that is detected but cannot be used is still listed with an explanation. If yours
+is unavailable, check its USB connection, firmware and, on Windows, its Device Manager status.
 
-## Platforms
+## Getting started
 
-- **Windows** — Windows 10 version 1809 or later; x86, x64 and ARM64.
-- **macOS** — Intel and Apple silicon; source builds require Apple's command-line developer tools.
-- Linux is not supported.
+1. Install diCAN and connect a supported USB-CAN adapter.
+2. Open **Session → New session**, choose the adapter and configure the CAN mode and bit rates
+   for your bus.
+3. Inspect incoming frames in the grouped table or frame stream. Use the transmit queue when
+   you want to send frames.
+4. Start recording when needed. Open **Tools → Manage recordings** to export or delete a
+   saved recording.
 
-The Microsoft Store and Mac App Store submissions are under review as of 27 September 2026.
-Submission does not mean the app is already available in either store. Download availability
-and package details will be listed on the repository's Releases page when published.
+If you need help, email **dsd_tech@outlook.com** with the adapter model, firmware version,
+operating system and the message shown by diCAN.
 
 ## Privacy and local data
 
 No account or sign-in is required. diCAN makes no network connections and does not automatically
-upload your settings, adapter information, CAN traffic or diagnostic logs.
+upload settings, adapter information, CAN traffic or diagnostic logs.
 
-Settings, recordings and logs stay in the local application data directory. Download builds
-use `%APPDATA%\diCAN` on Windows and `~/Library/Application Support/diCAN` on macOS; store builds
-use their separate package or sandbox locations. See `PRIVACY.md` for the complete directory list.
+Settings, recordings and logs stay on your computer. Download builds use `%APPDATA%\diCAN`
+on Windows and `~/Library/Application Support/diCAN` on macOS. Store builds use separate
+package or sandbox locations; see [PRIVACY.md](PRIVACY.md) for the directory list and deletion
+instructions.
 
-The privacy policy used by both stores is available at
-[Privacy Policy](https://github.com/dsdtech-official/.github/blob/main/docs/dican/PRIVACY.md).
+The privacy policy used by the stores is also available at this
+[public address](https://github.com/dsdtech-official/.github/blob/main/docs/dican/PRIVACY.md).
+Review logs and recordings for sensitive information before sending them for support.
 
 ## Building from source
 
-Requires the [.NET 10 SDK](https://dotnet.microsoft.com/download). On macOS, install Apple's
+Install the [.NET 10 SDK](https://dotnet.microsoft.com/download). On macOS, install Apple's
 command-line developer tools as well; the Mac project builds its native USB library with
 `xcrun clang`. Build on the platform you intend to run on.
 
-```
+```sh
 dotnet build diCAN.sln -c Release
 dotnet run --project src/diCAN.App -- --data-dir ./artifacts/dev-data
 ```
 
-The run command uses a Debug build with a separate development data directory. These commands
-build and run the application; they do not reproduce store signing, sandbox packaging or installers.
+The run command uses a Debug build and a separate development data directory. These commands
+build and run the application; they do not reproduce store signing, sandbox packaging or
+installers. Windows source builds support x86, x64 and ARM64.
 
-## Source references and maintenance
+## About this repository
 
-Internal documents, tests and development tools are not included in this public source release.
-Source comments provide brief descriptions of classes and functions.
+This repository contains diCAN's product source. Internal documents, tests and development
+tools are not included. The build instructions above cover the application source; store
+packaging tools are not included.
 
-This repository publishes DSD TECH releases. External contributions and pull requests are not
-accepted. Report ordinary problems through Issues; report security issues privately as described
-in `SECURITY.md`.
-
-## Not in this version
-
-Recording playback, and any form of scripting or automation API.
+DSD TECH publishes and maintains the software. External contributions and pull requests are
+not accepted. Report ordinary problems through
+[Issues](https://github.com/dsdtech-official/diCAN/issues); report security issues privately
+as described in [SECURITY.md](SECURITY.md).
 
 ## Licence
 
-Apache-2.0. See `LICENSE`, and `NOTICE` plus `THIRD-PARTY-NOTICES` for the attributions.
+diCAN is released under the Apache License 2.0. See [LICENSE](LICENSE), [NOTICE](NOTICE) and
+[THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES) for the licence and attributions.
 
 "DSD TECH" is a registered trademark of DongGuan DESHIDE TECHNOLOGY CO.,LTD. The licence covers
 the source code; it does not grant any right to use the trademark.
@@ -105,5 +127,4 @@ the source code; it does not grant any right to use the trademark.
 ---
 
 DongGuan DESHIDE TECHNOLOGY CO.,LTD · [www.deshide.com](https://www.deshide.com) ·
-东莞市德士德科技有限公司
-dsd_tech@outlook.com
+东莞市德士德科技有限公司 · **dsd_tech@outlook.com**
